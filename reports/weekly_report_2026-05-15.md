@@ -1,8 +1,8 @@
 # Minnesota Tax-Forfeited Land Sale Report
-**Generated:** 2026-05-15 10:21
+**Generated:** 2026-05-15 16:29
 **Counties Checked:** 90
-**Sales Found:** 82
-**Errors/Manual Review:** 17
+**Sales Found:** 81
+**Errors/Manual Review:** 18
 
 ---
 
@@ -74,7 +74,6 @@ AM | County Courthouse 411 W | [Link](https://www.co.cook.mn.us/government/depar
 | Nobles | In Person | TBD | 9:00 AM | the Nobles County Government Center, 315 10th Street, Worthington MN | [Link](https://www.co.nobles.mn.us/notice-of-public-sale-of-tax-forfeited-lands/) |
 | Norman | Online | TBD | TBD | a reduced amount to facilitate a sale | [Link](https://www.co.norman.mn.us/departments/auditor-treasurer/tax_forfeiture.php) |
 | Olmsted | Online | TBD | TBD | a reduced amount to facilitate a sale | [Link](https://www.olmstedcounty.gov/business/business-licensing-permits/sales/tax-forfeited-property#land-auctions__open--121118826) |
-| Otter Tail | In Person | TBD | 8:00 | See source | [Link](https://ottertailcountymn.us/content-page/tax-forfeited-lands/) |
 | Pennington | Unknown | TBD | TBD | See source | [Link](https://co.pennington.mn.us/index.php/services/treasurer) |
 | Pine | Over The Counter | TBD | 10:00 | County Courthouse | [Link](https://www.co.pine.mn.us/departments/land/tax_forfeited_land_for_sale.php) |
 | Polk | Unknown | TBD | 8:00 | See source | [Link](https://www.co.polk.mn.us/190/Forfeited-Property-Currently-for-Sale) |
@@ -648,15 +647,6 @@ AM
 - **Deadlines/Notes:** Date not extracted - manual review needed
 - **Excerpt:** age. Statement of Claim for Surplus Proceeds from Tax Forfeited Land Sale This item appears in Property Taxes Share this page Online Property Information Residents Business Government I Want To Apply ...
 
-### Otter Tail
-- **Sale type:** In Person
-- **Date:** TBD
-- **Time:** 8:00
-- **Location:** See source
-- **Source:** [https://ottertailcountymn.us/content-page/tax-forfeited-lands/](https://ottertailcountymn.us/content-page/tax-forfeited-lands/)
-- **Deadlines/Notes:** Date not extracted - manual review needed
-- **Excerpt:** AC S 212′ OF SL 6 & S 212′ OF SL 7 EX TR PLATTED TAX FORFEITED – 08/09/07) $1,900 Bid 12 28000020013000 Friberg Township (SECT-02 TWP-134 RANGE-042 1.79 AC LOT 1) $14,000 Bid 13 38000060043000 Maine T...
-
 ### Pennington
 - **Sale type:** Unknown
 - **Date:** TBD
@@ -828,19 +818,20 @@ Lincoln, Marshall, Pipestone, Rice, Rock, Roseau, Traverse, Wisconsin
 
 ---
 
-## Counties Needing Manual Review (17 entries)
+## Counties Needing Manual Review (18 entries)
 
 | County | URL | Issue |
 |---|---|---|
 | Aitkin | [Link](https://www.co.aitkin.mn.us/departments/Land/LandSaleNotice.html#gsc.tab=0) | http_404 |
-| Carver | [Link](https://www.co.carver.mn.us/departments/property-finance/property-tax/tax-forfeiture-sale) | connection_error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer')) |
+| Carver | [Link](https://www.co.carver.mn.us/departments/property-finance/property-tax/tax-forfeiture-sale) | connection_error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')) |
 | Cottonwood | [Link](https://www.co.cottonwood.mn.us/departments/administrative/auditor_treasurer/tax_forfeiture/index.php) | http_404 |
-| Douglas | [Link](https://www.co.douglas.mn.us/tax-forfeited-land) | connection_error: HTTPSConnectionPool(host='www.co.douglas.mn.us', port=443): Max retries exceeded with url: /tax-forfeited-land (Caused by NameResolutionError("HTTPSConnection(host='www.co.douglas.mn.us', port=443): Failed to resolve 'www.co.douglas.mn.us' ([Errno 8] nodename nor servname provided, or not known)")) |
+| Douglas | [Link](https://www.co.douglas.mn.us/tax-forfeited-land) | connection_error: HTTPSConnectionPool(host='www.co.douglas.mn.us', port=443): Max retries exceeded with url: /tax-forfeited-land (Caused by NameResolutionError("HTTPSConnection(host='www.co.douglas.mn.us', port=443): Failed to resolve 'www.co.douglas.mn.us' ([Errno -2] Name or service not known)")) |
 | Faribault | [Link](https://www.co.faribault.mn.us/auditor-treasurer/pages/tax-forfeiture-land-sale-information) | http_403 |
 | Hennepin | [Link](https://www.hennepin.us/residents/property/tax-forfeited-land) | http_404 |
 | Lyon | [Link](https://www.lyonco.org/departments/auditor-treasurer/tax-forfeited-land) | http_403 |
 | Mahnomen | [Link](https://co.mahnomen.mn.us/taxpayer) | http_404 |
 | Murray | [Link](https://www.murray-countymn.com/_T7_R319.php) | http_404 |
+| Otter Tail | [Link](https://ottertailcountymn.us/content-page/tax-forfeited-lands/) | http_403 |
 | Ramsey | [Link](https://www.ramseycounty.us/residents/property-home/property-sales/tax-forfeited-auctions) | http_404 |
 | Red Lake | [Link](https://www.co.red-lake.mn.us/propertytax) | Page content too short - may require JavaScript |
 | Renville | [Link](https://www.renvillecountymn.gov/departments/auditor_tresurer/frequently_asked_questions_about_tax_forfeited_lands.php) | http_404 |
@@ -855,9 +846,9 @@ Lincoln, Marshall, Pipestone, Rice, Rock, Roseau, Traverse, Wisconsin
 ## Check Statistics
 
 - error_connection_error: 2
-- error_http_403: 2
+- error_http_403: 3
 - error_http_404: 11
 - error_timeout: 1
 - needs_manual_review: 1
 - no_sale_found: 8
-- sale_found: 73
+- sale_found: 72
