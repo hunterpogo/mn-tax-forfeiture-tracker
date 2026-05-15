@@ -1,0 +1,109 @@
+name: Weekly MN Tax-Forfeited Land Check
+
+on:
+  schedule:
+    # Monday 11:00 UTC = 6:00 AM CDT (Mar–Nov) / 5:00 AM CST (Nov–Mar)
+    - cron: '0 11 * * 1'
+  workflow_dispatch:  # Allow manual trigger from Actions UI
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run the tax-forfeiture checker
+        run: python3 mn_tax_sale_checker.py
+
+      - name: Commit reports back to the repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/ logs/ mn_county_tax_forfeiture_sources.csv
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Weekly check $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      - name: Create issue with report summary
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const date = new Date().toISOString().split('T')[0];
+            const reportPath = `reports/weekly_report_${date}.md`;
+
+            if (!fs.existsSync(reportPath)) {
+              core.setFailed(`Report not found: ${reportPath}`);
+              return;
+            }
+
+            const full = fs.readFileSync(reportPath, 'utf8');
+            const lines = full.split('\n');
+
+            const findIdx = (needle) => lines.findIndex(l => l.includes(needle));
+            const upcomingIdx = findIdx('## Upcoming Sales');
+            const detailsIdx = findIdx('## Details');
+            const noSalesIdx = findIdx('## Counties Checked With No');
+            const manualIdx = findIdx('## Counties Needing Manual');
+            const statsIdx = findIdx('## Check Statistics');
+
+            const header = lines.slice(0, upcomingIdx).join('\n');
+            const upcoming = upcomingIdx >= 0 && detailsIdx > upcomingIdx
+              ? lines.slice(upcomingIdx, detailsIdx).join('\n')
+              : '';
+            const noSales = noSalesIdx >= 0 && manualIdx > noSalesIdx
+              ? lines.slice(noSalesIdx, manualIdx).join('\n')
+              : '';
+            const manual = manualIdx >= 0 && statsIdx > manualIdx
+              ? lines.slice(manualIdx, statsIdx).join('\n')
+              : '';
+            const stats = statsIdx >= 0 ? lines.slice(statsIdx).join('\n') : '';
+
+            const repoUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}`;
+            const reportLink = `${repoUrl}/blob/main/${reportPath}`;
+            const csvLink = `${repoUrl}/blob/main/reports/weekly_report_${date}.csv`;
+
+            const body = [
+              header,
+              upcoming,
+              `\n📄 **Full report (with per-county details):** [${reportPath}](${reportLink})`,
+              `📊 **CSV export:** [weekly_report_${date}.csv](${csvLink})`,
+              '',
+              noSales,
+              '',
+              manual,
+              '',
+              stats,
+            ].filter(Boolean).join('\n');
+
+            // Cap at 60KB to stay well under GitHub's 65KB issue body limit
+            const capped = body.length > 60000
+              ? body.slice(0, 59800) + '\n\n_...truncated. See full report linked above._'
+              : body;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Weekly MN Tax-Forfeited Land Report — ${date}`,
+              body: capped,
+              labels: ['weekly-report'],
+            });
