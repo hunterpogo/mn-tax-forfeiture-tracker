@@ -1,8 +1,8 @@
 # Minnesota Tax-Forfeited Land Sale Report
-**Generated:** 2026-05-15 16:29
+**Generated:** 2026-05-15 17:34
 **Counties Checked:** 90
-**Sales Found:** 81
-**Errors/Manual Review:** 18
+**Sales Found:** 80
+**Errors/Manual Review:** 19
 
 ---
 
@@ -71,7 +71,6 @@ AM | County Courthouse 411 W | [Link](https://www.co.cook.mn.us/government/depar
 | Morrison | Unknown | TBD | TBD | See source | [Link](https://www.co.morrison.mn.us/283/Land) |
 | Mower | Online | TBD | TBD | See source | [Link](https://www.co.mower.mn.us/191/Tax-Forfeited-Properties-For-Sale) |
 | Nicollet | Unknown | TBD | 4:30 | County Government Center | [Link](https://www.co.nicollet.mn.us/170/Tax-Forfeited-Properties) |
-| Nobles | In Person | TBD | 9:00 AM | the Nobles County Government Center, 315 10th Street, Worthington MN | [Link](https://www.co.nobles.mn.us/notice-of-public-sale-of-tax-forfeited-lands/) |
 | Norman | Online | TBD | TBD | a reduced amount to facilitate a sale | [Link](https://www.co.norman.mn.us/departments/auditor-treasurer/tax_forfeiture.php) |
 | Olmsted | Online | TBD | TBD | a reduced amount to facilitate a sale | [Link](https://www.olmstedcounty.gov/business/business-licensing-permits/sales/tax-forfeited-property#land-auctions__open--121118826) |
 | Pennington | Unknown | TBD | TBD | See source | [Link](https://co.pennington.mn.us/index.php/services/treasurer) |
@@ -620,15 +619,6 @@ AM
 - **Deadlines/Notes:** Date not extracted - manual review needed
 - **Excerpt:** Tax Forfeited Properties | Nicollet County, MN - Official Website Skip to Main Content Create a Website Account - Manage notification subscriptions, save form progress and more. Website Sign In Search...
 
-### Nobles
-- **Sale type:** In Person
-- **Date:** TBD
-- **Time:** 9:00 AM
-- **Location:** the Nobles County Government Center, 315 10th Street, Worthington MN
-- **Source:** [https://www.co.nobles.mn.us/notice-of-public-sale-of-tax-forfeited-lands/](https://www.co.nobles.mn.us/notice-of-public-sale-of-tax-forfeited-lands/)
-- **Deadlines/Notes:** Date not extracted - manual review needed
-- **Excerpt:** & Adoption Recycling Services for Senior Citizens Tax Forfeited Property Locate School Districts Communities Voting Districts – Federal Voting Districts – State Voting Districts – Local Pay Child Supp...
-
 ### Norman
 - **Sale type:** Online
 - **Date:** TBD
@@ -818,7 +808,7 @@ Lincoln, Marshall, Pipestone, Rice, Rock, Roseau, Traverse, Wisconsin
 
 ---
 
-## Counties Needing Manual Review (18 entries)
+## Counties Needing Manual Review (19 entries)
 
 | County | URL | Issue |
 |---|---|---|
@@ -831,6 +821,7 @@ Lincoln, Marshall, Pipestone, Rice, Rock, Roseau, Traverse, Wisconsin
 | Lyon | [Link](https://www.lyonco.org/departments/auditor-treasurer/tax-forfeited-land) | http_403 |
 | Mahnomen | [Link](https://co.mahnomen.mn.us/taxpayer) | http_404 |
 | Murray | [Link](https://www.murray-countymn.com/_T7_R319.php) | http_404 |
+| Nobles | [Link](https://www.co.nobles.mn.us/notice-of-public-sale-of-tax-forfeited-lands/) | Page content too short - may require JavaScript |
 | Otter Tail | [Link](https://ottertailcountymn.us/content-page/tax-forfeited-lands/) | http_403 |
 | Ramsey | [Link](https://www.ramseycounty.us/residents/property-home/property-sales/tax-forfeited-auctions) | http_404 |
 | Red Lake | [Link](https://www.co.red-lake.mn.us/propertytax) | Page content too short - may require JavaScript |
@@ -849,6 +840,6 @@ Lincoln, Marshall, Pipestone, Rice, Rock, Roseau, Traverse, Wisconsin
 - error_http_403: 3
 - error_http_404: 11
 - error_timeout: 1
-- needs_manual_review: 1
+- needs_manual_review: 2
 - no_sale_found: 8
-- sale_found: 72
+- sale_found: 71
