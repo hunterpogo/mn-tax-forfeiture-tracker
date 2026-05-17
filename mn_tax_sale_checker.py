@@ -507,43 +507,87 @@ def generate_markdown_report(
     lines.append("---")
     lines.append("")
 
-    # Upcoming sales table
-    lines.append("## Upcoming Sales Found")
-    lines.append("")
-    if sales:
-        lines.append("| County / Municipality | Sale Type | Date | Time | Location / Platform | Source |")
-        lines.append("|---|---|---|---|---|---|")
-        for s in sales:
+    # Split into auctions vs OTC sales, each sorted by soonest date first
+    # OTC = over_the_counter only; Auctions = online / in_person / sealed_bid / unknown
+    def _sort_key(rec):
+        return (rec.sale_date or date.max, rec.county)
+
+    otc_sales = sorted(
+        [s for s in sales if s.sale_type == "over_the_counter"],
+        key=_sort_key,
+    )
+    auction_sales = sorted(
+        [s for s in sales if s.sale_type != "over_the_counter"],
+        key=_sort_key,
+    )
+
+    def _render_table(records):
+        out = []
+        out.append("| County / Municipality | Sale Type | Date | Time | Location / Platform | Source |")
+        out.append("|---|---|---|---|---|---|")
+        for s in records:
             date_str = s.sale_date.strftime("%Y-%m-%d") if s.sale_date else "TBD"
             time_str = s.sale_time or "TBD"
             loc_str = s.location or s.online_url or "See source"
             type_str = format_sale_type(s.sale_type)
-            lines.append(f"| {s.county} | {type_str} | {date_str} | {time_str} | {loc_str} | [Link]({s.source_url}) |")
+            out.append(f"| {s.county} | {type_str} | {date_str} | {time_str} | {loc_str} | [Link]({s.source_url}) |")
+        return out
+
+    def _render_details(records):
+        out = []
+        for s in records:
+            out.append(f"### {s.county}")
+            out.append(f"- **Sale type:** {format_sale_type(s.sale_type)}")
+            out.append(f"- **Date:** {s.sale_date_raw or 'TBD'}")
+            out.append(f"- **Time:** {s.sale_time or 'TBD'}")
+            out.append(f"- **Location:** {s.location or 'See source'}")
+            if s.online_url:
+                out.append(f"- **Online link:** {s.online_url}")
+            out.append(f"- **Source:** [{s.source_url}]({s.source_url})")
+            if s.deadlines:
+                out.append(f"- **Deadlines/Notes:** {s.deadlines}")
+            out.append(f"- **Excerpt:** {s.description[:200]}...")
+            out.append("")
+        return out
+
+    # === Section 1: Upcoming Auctions ===
+    lines.append(f"## Upcoming Auctions ({len(auction_sales)})")
+    lines.append("_Online, in-person, and sealed-bid sales — sorted by soonest date._")
+    lines.append("")
+    if auction_sales:
+        lines.extend(_render_table(auction_sales))
         lines.append("")
     else:
-        lines.append("No upcoming sales found this week.")
+        lines.append("No upcoming auctions found.")
         lines.append("")
 
-    # Details
+    # === Section 2: Over-the-Counter Sales ===
+    lines.append("---")
+    lines.append("")
+    lines.append(f"## Over-the-Counter (OTC) Sales ({len(otc_sales)})")
+    lines.append("_Ongoing/repurchase sales available at fixed price — sorted by soonest date._")
+    lines.append("")
+    if otc_sales:
+        lines.extend(_render_table(otc_sales))
+        lines.append("")
+    else:
+        lines.append("No over-the-counter sales found.")
+        lines.append("")
+
+    # Details split into the same two buckets
     lines.append("---")
     lines.append("")
     lines.append("## Details")
     lines.append("")
-    if sales:
-        for s in sales:
-            lines.append(f"### {s.county}")
-            lines.append(f"- **Sale type:** {format_sale_type(s.sale_type)}")
-            lines.append(f"- **Date:** {s.sale_date_raw or 'TBD'}")
-            lines.append(f"- **Time:** {s.sale_time or 'TBD'}")
-            lines.append(f"- **Location:** {s.location or 'See source'}")
-            if s.online_url:
-                lines.append(f"- **Online link:** {s.online_url}")
-            lines.append(f"- **Source:** [{s.source_url}]({s.source_url})")
-            if s.deadlines:
-                lines.append(f"- **Deadlines/Notes:** {s.deadlines}")
-            lines.append(f"- **Excerpt:** {s.description[:200]}...")
-            lines.append("")
-    else:
+    if auction_sales:
+        lines.append("### Auctions")
+        lines.append("")
+        lines.extend(_render_details(auction_sales))
+    if otc_sales:
+        lines.append("### OTC Sales")
+        lines.append("")
+        lines.extend(_render_details(otc_sales))
+    if not (auction_sales or otc_sales):
         lines.append("No sale details to display.")
         lines.append("")
 
@@ -590,29 +634,47 @@ def generate_markdown_report(
 
 
 def generate_csv_report(sales: List[SaleRecord], run_date: date) -> None:
-    """Write the CSV report of found sales."""
+    """Write the CSV report of found sales.
+
+    Sorted: auctions first (by soonest date), then OTC sales (by soonest date).
+    A `bucket` column distinguishes the two for easy filtering in a spreadsheet.
+    """
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
     path = REPORTS_DIR / f"weekly_report_{run_date.isoformat()}.csv"
+
+    def _sort_key(rec):
+        return (rec.sale_date or date.max, rec.county)
+
+    auction_sales = sorted(
+        [s for s in sales if s.sale_type != "over_the_counter"],
+        key=_sort_key,
+    )
+    otc_sales = sorted(
+        [s for s in sales if s.sale_type == "over_the_counter"],
+        key=_sort_key,
+    )
 
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow([
-            "county", "sale_date", "sale_time", "sale_type", "location",
+            "bucket", "county", "sale_date", "sale_time", "sale_type", "location",
             "online_url", "description", "source_url", "source_type", "deadlines",
         ])
-        for s in sales:
-            writer.writerow([
-                s.county,
-                s.sale_date.isoformat() if s.sale_date else "",
-                s.sale_time or "",
-                format_sale_type(s.sale_type),
-                s.location or "",
-                s.online_url or "",
-                s.description[:200],
-                s.source_url,
-                s.source_type,
-                s.deadlines or "",
-            ])
+        for bucket_name, group in (("auction", auction_sales), ("otc", otc_sales)):
+            for s in group:
+                writer.writerow([
+                    bucket_name,
+                    s.county,
+                    s.sale_date.isoformat() if s.sale_date else "",
+                    s.sale_time or "",
+                    format_sale_type(s.sale_type),
+                    s.location or "",
+                    s.online_url or "",
+                    s.description[:200],
+                    s.source_url,
+                    s.source_type,
+                    s.deadlines or "",
+                ])
 
     log.info("CSV report written to %s", path)
 
