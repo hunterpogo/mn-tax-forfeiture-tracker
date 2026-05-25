@@ -1,0 +1,99 @@
+county,url,check_time,http_status,result,keywords_found,error_detail
+Aitkin,https://www.co.aitkin.mn.us/departments/Land/LandSaleNotice.html#gsc.tab=0,2026-05-25T17:21:54,404,error_http_404,,http_404
+Aitkin,https://www.co.aitkin.mn.us/departments/land/land-sales.php,2026-05-25T17:21:56,200,sale_found,tax-forfeited; forfeited land; land sale,
+Anoka,https://www.anokacounty.us/310/Tax-Forfeited-Land-Sales,2026-05-25T17:21:58,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; forfeited property,
+Becker,https://www.co.becker.mn.us/dept/natural_resource/tax_forfeited_sales.aspx,2026-05-25T17:22:01,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; tax forfeit,SSL certificate warning - fetched with verify=False
+Beltrami,https://www.co.beltrami.mn.us/business-development/tax-forfeited-land-sales/,2026-05-25T17:22:03,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; tax forfeit,
+Benton,https://www.co.benton.mn.us/187/Tax-Forfeited-Properties,2026-05-25T17:22:06,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; public auction,
+Big Stone,https://bigstonecounty.gov/departments/auditor-treasurer/forfeited-land/,2026-05-25T17:22:08,200,sale_found,tax forfeited; tax-forfeited; forfeited land; tax forfeit,
+Blue Earth,https://www.blueearthcountymn.gov/463/Tax-Forfeiture,2026-05-25T17:22:12,200,sale_found,tax-forfeited; forfeited parcels; tax forfeit,
+Brown,https://www.co.brown.mn.us/183/General-Auction-Property-Sale-Informatio,2026-05-25T17:22:14,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; public auction,
+Carlton,https://www.co.carlton.mn.us/163/Land-Department,2026-05-25T17:22:17,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; tax forfeit,
+Carver,https://www.co.carver.mn.us/departments/property-finance/property-tax/tax-forfeiture-sale,2026-05-25T17:22:19,,error_connection_error,,"connection_error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
+Cass,https://www.casscountymn.gov/1339/Land-Sales,2026-05-25T17:22:28,200,sale_found,tax-forfeited; forfeited land; land sale; public auction; over-the-counter,
+Chippewa,https://www.co.chippewa.mn.us/311/Tax-Forfeiture-List,2026-05-25T17:22:31,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; public auction,
+Chisago,https://www.chisagocounty.us/161/Tax-Forfeited-Land,2026-05-25T17:22:33,200,sale_found,tax forfeited; forfeited land; public auction; classification sale; forfeited property,
+Clay,https://claycountymn.gov/290/Forfeiture-Property-for-Sale,2026-05-25T17:22:36,200,sale_found,tax forfeited; forfeited land; auction sale; tax forfeit,
+Clearwater,https://www.co.clearwater.mn.us/index.asp?SEC=49B3D327-94F9-4B4A-B2D1-3B8A64A59AAF,2026-05-25T17:22:39,200,sale_found,tax-forfeited; forfeited land; land sale; county land sale,
+Cook,https://www.co.cook.mn.us/government/departments/auditor_treasurer/tax_forfeited_land_sales.php,2026-05-25T17:22:41,200,sale_found,tax forfeited; forfeited land; land sale; tax forfeit,
+Cottonwood,https://www.co.cottonwood.mn.us/departments/administrative/auditor_treasurer/tax_forfeiture/index.php,2026-05-25T17:22:44,404,error_http_404,,http_404
+Crow Wing,https://crowwing.us/269/Land-Sales,2026-05-25T17:22:47,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; public auction,
+Dakota,https://www.co.dakota.mn.us/HomeProperty/Forfeited,2026-05-25T17:22:49,200,sale_found,tax-forfeited; forfeited land; forfeited property; forfeited parcels; tax forfeit,
+Dodge,https://www.co.dodge.mn.us/departments/adminstration/tax-forfeited_property.php,2026-05-25T17:22:52,200,sale_found,tax-forfeited; forfeited land; forfeited property,
+Douglas,https://www.co.douglas.mn.us/tax-forfeited-land,2026-05-25T17:22:54,,error_connection_error,,"connection_error: HTTPSConnectionPool(host='www.co.douglas.mn.us', port=443): Max retries exceeded with url: /tax-forfeited-land (Caused by NameResolutionError(""HTTPSConnection(host='www.co.douglas.mn.us', port=443): Failed to resolve 'www.co.douglas.mn.us' ([Errno -2] Name or service not known)""))"
+Faribault,https://www.co.faribault.mn.us/auditor-treasurer/pages/tax-forfeiture-land-sale-information,2026-05-25T17:23:03,403,error_http_403,,http_403
+Fillmore,https://www.co.fillmore.mn.us/departments/auditor_treasurer/tax_forfeited_land_sales.php,2026-05-25T17:23:05,200,sale_found,tax forfeited; forfeited land; land sale; public auction; forfeiture sale,
+Freeborn,https://www.co.freeborn.mn.us/168/Forfeiture-Property,2026-05-25T17:23:07,200,sale_found,tax forfeited; tax-forfeited; forfeited property; forfeited parcels; tax forfeit,
+Goodhue,https://www.co.goodhue.mn.us/719/Tax-Forfeited-Land,2026-05-25T17:23:10,200,sale_found,tax forfeited; forfeited land; public auction; forfeited parcels; tax forfeit,
+Grant,https://www.co.grant.mn.us/371/Tax-Forfeiture-PropertiesFor-Immediate-S,2026-05-25T17:23:13,200,sale_found,tax forfeit,
+Hennepin,https://www.hennepin.us/residents/property/tax-forfeited-land,2026-05-25T17:23:15,404,error_http_404,,http_404
+Houston,https://www.co.houston.mn.us/departments/auditor-treasurer/,2026-05-25T17:23:22,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; public auction,
+Hubbard,https://co.hubbard.mn.us/tfl,2026-05-25T17:23:24,200,sale_found,tax forfeited; forfeited land; land sale; public auction; over-the-counter,
+Isanti,https://www.co.isanti.mn.us/228/Tax-Forfeited-Property,2026-05-25T17:23:27,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; public auction,
+Itasca,https://www.co.itasca.mn.us/616/Tax-Forfeit-Land,2026-05-25T17:23:30,200,sale_found,tax forfeited; forfeited land; public auction; tax forfeit,
+Itasca,https://www.co.itasca.mn.us/304/Real-Estate,2026-05-25T17:23:33,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; over-the-counter,
+Jackson,https://www.co.jackson.mn.us/auditor,2026-05-25T17:23:36,200,sale_found,tax forfeited; tax forfeit,
+Kanabec,https://www.kanabeccounty.org/departments/tax_forfeit_land_sale.php,2026-05-25T17:23:38,200,sale_found,tax forfeited; land sale; forfeited parcels; tax forfeit,
+Kandiyohi,https://www.kcmn.us/departments/auditor_treasurer/tax_forfeited_lands_for_sale.php,2026-05-25T17:23:41,200,sale_found,tax forfeited; forfeited land; tax forfeit,
+Kittson,https://www.co.kittson.mn.us/government/departments/taxpayer_services.php,2026-05-25T17:23:43,200,sale_found,tax-forfeited; forfeited land; land sale,
+Koochiching,https://www.co.koochiching.mn.us/259/Tax-Forfeited-Land-Sales,2026-05-25T17:23:45,200,sale_found,tax forfeited; forfeited land; land sale; over-the-counter; tax forfeit,
+Lac qui Parle,https://www.lqpco.com/319/Forfeited-Properties,2026-05-25T17:23:48,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; public auction,
+Lake,https://www.co.lake.mn.us/forestry/land-sales/,2026-05-25T17:23:51,200,sale_found,tax-forfeited; forfeited land; land sale; forfeiture sale; forfeited property,
+Lake of the Woods,https://www.co.lake-of-the-woods.mn.us/auditor/property-taxes/,2026-05-25T17:23:54,200,sale_found,tax forfeited; land sale; forfeited property; tax forfeit,
+Lake of the Woods,https://www.co.lake-of-the-woods.mn.us/community/land-sales/,2026-05-25T17:23:58,200,sale_found,tax-forfeited; forfeited land; land sale; public auction,
+Le Sueur,https://www.co.le-sueur.mn.us/DocumentCenter/View/139/Forfeit-Property-for-Sale-PDF,2026-05-25T17:24:02,200,sale_found,tax forfeit,
+Le Sueur,https://www.co.le-sueur.mn.us/185/Auditor-Treasurer-Office,2026-05-25T17:24:05,200,sale_found,tax forfeited; forfeited property; tax forfeit,
+Lincoln,http://www.co.lincoln.mn.us/Departments/AuditorTreasurer.html,2026-05-25T17:24:08,200,no_sale_found,,
+Lyon,https://www.lyonco.org/departments/auditor-treasurer/tax-forfeited-land,2026-05-25T17:24:16,403,error_http_403,,http_403
+Mahnomen,https://co.mahnomen.mn.us/taxpayer,2026-05-25T17:24:23,404,error_http_404,,http_404
+Marshall,https://www.co.marshall.mn.us/departments/auditor-treasurer/index.php,2026-05-25T17:24:26,200,no_sale_found,,
+Martin,https://www.co.martin.mn.us/your_government/departments/auditor_treasurer/tax_forfeited_land.php,2026-05-25T17:24:31,200,sale_found,tax forfeited; tax-forfeited; forfeited land; tax forfeit,
+McLeod,https://www.co.mcleod.mn.us/government/auditor-treasurer/tax_forfeited_property.php,2026-05-25T17:24:33,200,sale_found,tax forfeited; forfeited land; land sale; public auction; forfeited property,
+Meeker,https://www.co.meeker.mn.us/336/Tax-Forfeit-Property,2026-05-25T17:24:36,200,sale_found,tax forfeited; forfeited property; tax forfeit,
+Mille Lacs,https://www.millelacs.mn.gov/2700/Tax-Forfeited-Property,2026-05-25T17:24:38,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; public auction,
+Morrison,https://www.co.morrison.mn.us/283/Land,2026-05-25T17:24:41,200,sale_found,tax forfeited; forfeited land; land sale; forfeited parcels; tax forfeit,
+Mower,https://www.co.mower.mn.us/191/Tax-Forfeited-Properties-For-Sale,2026-05-25T17:24:43,200,sale_found,tax forfeited; tax-forfeited; forfeited land; public auction; tax forfeit,
+Murray,https://www.murray-countymn.com/_T7_R319.php,2026-05-25T17:24:46,404,error_http_404,,http_404
+Nicollet,https://www.co.nicollet.mn.us/170/Tax-Forfeited-Properties,2026-05-25T17:24:48,200,sale_found,tax forfeited; forfeited land; forfeiture sale; forfeited property; forfeited parcels,
+Nobles,https://www.co.nobles.mn.us/notice-of-public-sale-of-tax-forfeited-lands/,2026-05-25T17:24:51,200,sale_found,tax forfeited; tax-forfeited; forfeited land; public auction; forfeited property,
+Norman,https://www.co.norman.mn.us/departments/auditor-treasurer/tax_forfeiture.php,2026-05-25T17:24:55,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; classification sale,
+Olmsted,https://www.olmstedcounty.gov/business/business-licensing-permits/sales/tax-forfeited-property#land-auctions__open--121118826,2026-05-25T17:24:58,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; over-the-counter,
+Otter Tail,https://ottertailcountymn.us/content-page/tax-forfeited-lands/,2026-05-25T17:25:00,403,error_http_403,,http_403
+Pennington,https://co.pennington.mn.us/index.php/services/treasurer,2026-05-25T17:25:02,200,sale_found,tax forfeited; forfeited land; land sale; tax forfeit,
+Pine,https://www.co.pine.mn.us/departments/land/tax_forfeited_land_for_sale.php,2026-05-25T17:25:05,200,sale_found,tax forfeited; forfeited land; land sale; over-the-counter; tax forfeit,
+Pipestone,https://www.pipestone-county.com/government/departments/assessor/property_tax.php,2026-05-25T17:25:08,200,no_sale_found,,
+Polk,https://www.co.polk.mn.us/190/Forfeited-Property-Currently-for-Sale,2026-05-25T17:25:15,200,sale_found,tax-forfeited; forfeited land; forfeited property; tax forfeit,
+Polk,https://www.co.polk.mn.us/192/Forfeited-Property-Auctions,2026-05-25T17:25:17,200,sale_found,forfeited property,
+Pope,https://pctribune.com/2023/11/notice-of-public-sale-of-tax-forfeited-lands/,2026-05-25T17:25:20,200,sale_found,tax forfeited; tax-forfeited; forfeited land; public auction; tax forfeit,
+Ramsey,https://www.ramseycounty.us/residents/property-home/property-sales/tax-forfeited-auctions,2026-05-25T17:25:22,404,error_http_404,,http_404
+Ramsey,https://www.ramseycounty.us/residents/property-home/property-sales/tax-forfeited-public-sales,2026-05-25T17:25:24,200,sale_found,tax-forfeited; forfeited land; public auction; forfeited parcels,
+Red Lake,https://www.co.red-lake.mn.us/propertytax,2026-05-25T17:25:27,200,needs_manual_review,,Page content too short - may require JavaScript
+Redwood,https://redwoodcounty-mn.us/departments/auditor-treasurer/,2026-05-25T17:25:29,200,sale_found,tax forfeited; forfeited property; tax forfeit,
+Renville,https://www.renvillecountymn.gov/departments/auditor_tresurer/frequently_asked_questions_about_tax_forfeited_lands.php,2026-05-25T17:25:32,404,error_http_404,,http_404
+Rice,https://www.ricecountymn.gov/249/Property-values-and-taxes,2026-05-25T17:25:35,200,no_sale_found,,
+Rock,https://www.co.rock.mn.us/index.php,2026-05-25T17:25:37,200,no_sale_found,,
+Roseau,https://www.co.roseau.mn.us/government/a_-_e/assessor/index.php,2026-05-25T17:25:53,200,sale_found,tax forfeited; forfeited land; land sale; tax forfeit,
+Saint Louis,https://www.stlouiscountymn.gov/departments-a-z/land-minerals/sales-and-contracts/tax-forfeited-land-sales,2026-05-25T17:25:56,200,sale_found,tax-forfeited; forfeited land; land sale; public auction; tax forfeit,
+Scott,https://www.scottcountymn.gov/DocumentCenter/View/11302/Tax-Forfeited-Properties-for-Sale,2026-05-25T17:25:59,404,error_http_404,,http_404
+Scott,https://www.scottcountymn.gov/1163/Property-Taxation-Services,2026-05-25T17:26:01,200,sale_found,tax forfeited; tax forfeit,
+Sherburne,https://www.co.sherburne.mn.us/232/Tax-Forfeited-Parcels,2026-05-25T17:26:04,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; public auction,
+Sibley,https://www.co.sibley.mn.us/government/departments/auditor/tax_forfeited_property.php,2026-05-25T17:26:07,404,error_http_404,,http_404
+Sibley,https://www.sibleycounty.gov/238/Property-Tax,2026-05-25T17:26:09,200,sale_found,tax forfeit,
+Stearns,https://www.stearnscountymn.gov/691/Tax-Forfeited-Property,2026-05-25T17:26:12,200,sale_found,tax-forfeited; forfeited property,
+Steele,https://www.co.steele.mn.us/divisions/land_use_and_records/auditor/tax_forfeited_properties_for_sale.php,2026-05-25T17:26:14,200,sale_found,tax forfeited; tax-forfeited; forfeited land; tax forfeit,
+Stevens,https://www.co.stevens.mn.us/888/Assessor,2026-05-25T17:26:17,200,sale_found,tax forfeit,
+Swift,https://www.swiftcounty.com/?SEC=9AEC2D5E-FE05-4C53-B5C9-5F1C373DF2A1,2026-05-25T17:26:20,404,error_http_404,,http_404
+Todd,https://www.co.todd.mn.us/divisions/property-records/auditor-treasurer/#1536095103838-5b7732a8-e005,2026-05-25T17:26:23,,error_timeout,,timeout
+Traverse,https://www.co.traverse.mn.us/departments/departments/assessor/,2026-05-25T17:28:01,200,no_sale_found,,
+Wabasha,https://www.co.wabasha.mn.us/departments/auditor_treasurer/tax_forfeited_property_sale.php,2026-05-25T17:28:06,200,sale_found,tax forfeited; forfeited property; tax forfeit,
+Wadena,http://www.co.wadena.mn.us/322/Tax-Forfeited-Land,2026-05-25T17:28:08,200,sale_found,tax forfeited; forfeited land; tax forfeit,
+Waseca,https://www.wasecacounty.gov/103/Assessors-Office,2026-05-25T17:28:11,200,sale_found,auction sale,
+Washington,https://www.co.washington.mn.us/1446/Sale-Information,2026-05-25T17:28:13,404,error_http_404,,http_404
+Watonwan,https://www.co.watonwan.mn.us/130/Tax-Forfeited-Sale,2026-05-25T17:28:16,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; forfeiture sale,
+Wilkin,https://www.co.wilkin.mn.us/auditortreasurer,2026-05-25T17:28:18,200,sale_found,tax forfeit,
+Winona,https://www.co.winona.mn.us/179/Forfeited-Tax-Sales,2026-05-25T17:28:21,200,sale_found,land sale; tax forfeit,
+Wright,https://www.co.wright.mn.us/191/Tax-Forfeiture,2026-05-25T17:28:24,200,sale_found,tax forfeited; tax-forfeited; forfeited land; land sale; forfeited parcels,
+Yellow Medicine,https://www.co.ym.mn.gov/index.asp?SEC=D7845C79-6866-43C2-81C3-44B92DBEA6F2,2026-05-25T17:28:28,200,sale_found,tax forfeited; forfeited land; land sale; auction sale; forfeited property,
+DNR,https://www.dnr.state.mn.us/lands_minerals/landsale/index.html,2026-05-25T17:28:30,200,sale_found,tax-forfeited; forfeited land; land sale; public auction,
+MN DOT,https://www.dot.state.mn.us/row/propsales.html,2026-05-25T17:28:32,200,sale_found,land sale; sealed bid; over-the-counter,
+Wisconsin,https://www.wisconsinsurplus.com,2026-05-25T17:28:35,200,no_sale_found,,
