@@ -1,91 +1,91 @@
 county,source_name,source_url,source_url_2,source_type,notes,last_checked_date,confidence_level
-Aitkin,Aitkin County Land Department,https://www.co.aitkin.mn.us/departments/Land/LandSaleNotice.html#gsc.tab=0,https://www.co.aitkin.mn.us/departments/land/land-sales.php,county_webpage,Two pages: land sale notice and land sales listing,2026-06-01,high
-Anoka,Anoka County Tax-Forfeited Land Sales,https://www.anokacounty.us/310/Tax-Forfeited-Land-Sales,,county_webpage,Dedicated tax-forfeited land sales page,2026-06-01,high
-Becker,Becker County Natural Resource Management,https://www.co.becker.mn.us/dept/natural_resource/tax_forfeited_sales.aspx,,county_webpage,Dedicated tax forfeited sales page,2026-06-01,high
-Beltrami,Beltrami County Business Development,https://www.co.beltrami.mn.us/business-development/tax-forfeited-land-sales/,,county_webpage,Dedicated tax-forfeited land sales page,2026-06-01,high
-Benton,Benton County Tax-Forfeited Properties,https://www.co.benton.mn.us/187/Tax-Forfeited-Properties,,county_webpage,Dedicated tax-forfeited properties page,2026-06-01,high
-Big Stone,Big Stone County Auditor-Treasurer,https://bigstonecounty.gov/departments/auditor-treasurer/forfeited-land/,,county_webpage,Forfeited land page under auditor-treasurer,2026-06-01,high
-Blue Earth,Blue Earth County Tax Forfeiture,https://www.blueearthcountymn.gov/463/Tax-Forfeiture,,county_webpage,Dedicated tax forfeiture page,2026-06-01,high
-Brown,Brown County Property Sale,https://www.co.brown.mn.us/183/General-Auction-Property-Sale-Informatio,,county_webpage,General auction/property sale information page,2026-06-01,high
-Carlton,Carlton County Land Department,https://www.co.carlton.mn.us/163/Land-Department,,county_webpage,Land department main page,2026-06-01,medium
-Carver,Carver County Tax Forfeiture Sale,https://www.co.carver.mn.us/departments/property-finance/property-tax/tax-forfeiture-sale,,county_webpage,Dedicated tax forfeiture sale page,2026-06-01,high
-Cass,Cass County Land Sales,https://www.casscountymn.gov/1339/Land-Sales,,county_webpage,Dedicated land sales page,2026-06-01,high
-Chippewa,Chippewa County Tax Forfeiture List,https://www.co.chippewa.mn.us/311/Tax-Forfeiture-List,,county_webpage,Dedicated tax forfeiture list page,2026-06-01,high
-Chisago,Chisago County Tax-Forfeited Land,https://www.chisagocounty.us/161/Tax-Forfeited-Land,,county_webpage,Dedicated tax-forfeited land page,2026-06-01,high
-Clay,Clay County Forfeiture Property for Sale,https://claycountymn.gov/290/Forfeiture-Property-for-Sale,,county_webpage,Dedicated forfeiture property page,2026-06-01,high
-Clearwater,Clearwater County Land Sales,https://www.co.clearwater.mn.us/index.asp?SEC=49B3D327-94F9-4B4A-B2D1-3B8A64A59AAF,,county_webpage,Section-based URL on county site,2026-06-01,medium
-Cook,Cook County Auditor-Treasurer,https://www.co.cook.mn.us/government/departments/auditor_treasurer/tax_forfeited_land_sales.php,,county_webpage,Dedicated tax forfeited land sales page,2026-06-01,high
-Cottonwood,Cottonwood County Tax Forfeiture,https://www.co.cottonwood.mn.us/departments/administrative/auditor_treasurer/tax_forfeiture/index.php,,county_webpage,Dedicated tax forfeiture page,2026-06-01,high
-Crow Wing,Crow Wing County Land Sales,https://crowwing.us/269/Land-Sales,,county_webpage,Dedicated land sales page,2026-06-01,high
-Dakota,Dakota County Forfeited Property,https://www.co.dakota.mn.us/HomeProperty/Forfeited,,county_webpage,Dedicated forfeited property page,2026-06-01,high
-Dodge,Dodge County Tax-Forfeited Property,https://www.co.dodge.mn.us/departments/adminstration/tax-forfeited_property.php,,county_webpage,Dedicated tax-forfeited property page,2026-06-01,high
-Douglas,Douglas County Tax-Forfeited Land,https://www.co.douglas.mn.us/tax-forfeited-land,,county_webpage,Dedicated tax-forfeited land page,2026-06-01,high
-Faribault,Faribault County Auditor-Treasurer,https://www.co.faribault.mn.us/auditor-treasurer/pages/tax-forfeiture-land-sale-information,,county_webpage,Tax forfeiture land sale information page,2026-06-01,high
-Fillmore,Fillmore County Tax Forfeited Land Sales,https://www.co.fillmore.mn.us/departments/auditor_treasurer/tax_forfeited_land_sales.php,,county_webpage,Dedicated tax forfeited land sales page,2026-06-01,high
-Freeborn,Freeborn County Forfeiture Property,https://www.co.freeborn.mn.us/168/Forfeiture-Property,,county_webpage,Dedicated forfeiture property page,2026-06-01,high
-Goodhue,Goodhue County Tax-Forfeited Land,https://www.co.goodhue.mn.us/719/Tax-Forfeited-Land,,county_webpage,Dedicated tax-forfeited land page,2026-06-01,high
-Grant,Grant County Tax Forfeiture Properties,https://www.co.grant.mn.us/371/Tax-Forfeiture-PropertiesFor-Immediate-S,,county_webpage,Tax forfeiture properties for immediate sale page,2026-06-01,high
-Hennepin,Hennepin County Tax-Forfeited Land,https://www.hennepin.us/residents/property/tax-forfeited-land,,county_webpage,Dedicated tax-forfeited land page,2026-06-01,high
-Houston,Houston County Auditor-Treasurer,https://www.co.houston.mn.us/departments/auditor-treasurer/,https://www.co.houston.mn.us/departments/auditor-treasurer/,county_webpage,General auditor-treasurer page; both links are the same,2026-06-01,medium
-Hubbard,Hubbard County Tax-Forfeited Land,https://co.hubbard.mn.us/tfl,,county_webpage,Short URL for tax-forfeited land page,2026-06-01,high
-Isanti,Isanti County Tax-Forfeited Property,https://www.co.isanti.mn.us/228/Tax-Forfeited-Property,,county_webpage,Dedicated tax-forfeited property page,2026-06-01,high
-Itasca,Itasca County Tax Forfeit Land,https://www.co.itasca.mn.us/616/Tax-Forfeit-Land,https://www.co.itasca.mn.us/304/Real-Estate,county_webpage,Two pages: tax forfeit land and real estate,2026-06-01,high
-Jackson,Jackson County Auditor,https://www.co.jackson.mn.us/auditor,,county_webpage,General auditor page,2026-06-01,medium
-Kanabec,Kanabec County Tax Forfeit Land Sale,https://www.kanabeccounty.org/departments/tax_forfeit_land_sale.php,,county_webpage,Dedicated tax forfeit land sale page,2026-06-01,high
-Kandiyohi,Kandiyohi County Tax Forfeited Lands,https://www.kcmn.us/departments/auditor_treasurer/tax_forfeited_lands_for_sale.php,,county_webpage,Dedicated tax forfeited lands for sale page,2026-06-01,high
-Kittson,Kittson County Taxpayer Services,https://www.co.kittson.mn.us/government/departments/taxpayer_services.php,,county_webpage,General taxpayer services page,2026-06-01,medium
-Koochiching,Koochiching County Tax-Forfeited Land Sales,https://www.co.koochiching.mn.us/259/Tax-Forfeited-Land-Sales,,county_webpage,Dedicated tax-forfeited land sales page,2026-06-01,high
-Lac qui Parle,Lac qui Parle County Forfeited Properties,https://www.lqpco.com/319/Forfeited-Properties,,county_webpage,Dedicated forfeited properties page,2026-06-01,high
-Lake,Lake County Land Sales,https://www.co.lake.mn.us/forestry/land-sales/,,county_webpage,Land sales page under forestry department,2026-06-01,high
-Lake of the Woods,Lake of the Woods County Land Sales,https://www.co.lake-of-the-woods.mn.us/auditor/property-taxes/,https://www.co.lake-of-the-woods.mn.us/community/land-sales/,county_webpage,Two pages: auditor property taxes and community land sales,2026-06-01,high
-Le Sueur,Le Sueur County Auditor-Treasurer,https://www.co.le-sueur.mn.us/DocumentCenter/View/139/Forfeit-Property-for-Sale-PDF,https://www.co.le-sueur.mn.us/185/Auditor-Treasurer-Office,pdf_page,Primary link is a PDF document; secondary is auditor-treasurer office page,2026-06-01,medium
-Lincoln,Lincoln County Auditor-Treasurer,http://www.co.lincoln.mn.us/Departments/AuditorTreasurer.html,,county_webpage,General auditor-treasurer page; HTTP only,2026-06-01,medium
-Lyon,Lyon County Tax-Forfeited Land,https://www.lyonco.org/departments/auditor-treasurer/tax-forfeited-land,,county_webpage,Dedicated tax-forfeited land page,2026-06-01,high
-Mahnomen,Mahnomen County Taxpayer Services,https://co.mahnomen.mn.us/taxpayer,,county_webpage,General taxpayer services page,2026-06-01,medium
-Marshall,Marshall County Auditor-Treasurer,https://www.co.marshall.mn.us/departments/auditor-treasurer/index.php,,county_webpage,General auditor-treasurer page,2026-06-01,medium
-Martin,Martin County Tax Forfeited Land,https://www.co.martin.mn.us/your_government/departments/auditor_treasurer/tax_forfeited_land.php,,county_webpage,Dedicated tax forfeited land page,2026-06-01,high
-McLeod,McLeod County Tax Forfeited Property,https://www.co.mcleod.mn.us/government/auditor-treasurer/tax_forfeited_property.php,,county_webpage,Dedicated tax forfeited property page,2026-06-01,high
-Meeker,Meeker County Tax Forfeit Property,https://www.co.meeker.mn.us/336/Tax-Forfeit-Property,,county_webpage,Dedicated tax forfeit property page,2026-06-01,high
-Mille Lacs,Mille Lacs County Tax-Forfeited Property,https://www.millelacs.mn.gov/2700/Tax-Forfeited-Property,,county_webpage,Dedicated tax-forfeited property page,2026-06-01,high
-Morrison,Morrison County Land,https://www.co.morrison.mn.us/283/Land,,county_webpage,Land department page,2026-06-01,medium
-Mower,Mower County Tax-Forfeited Properties,https://www.co.mower.mn.us/191/Tax-Forfeited-Properties-For-Sale,,county_webpage,Dedicated tax-forfeited properties for sale page,2026-06-01,high
-Murray,Murray County Land Sales,https://www.murray-countymn.com/_T7_R319.php,,county_webpage,County webpage with non-standard URL pattern,2026-06-01,medium
-Nicollet,Nicollet County Tax-Forfeited Properties,https://www.co.nicollet.mn.us/170/Tax-Forfeited-Properties,,county_webpage,Dedicated tax-forfeited properties page,2026-06-01,high
-Nobles,Nobles County Public Sale Notice,https://www.co.nobles.mn.us/notice-of-public-sale-of-tax-forfeited-lands/,,county_webpage,Public sale notice page,2026-06-01,high
-Norman,Norman County Tax Forfeiture,https://www.co.norman.mn.us/departments/auditor-treasurer/tax_forfeiture.php,,county_webpage,Dedicated tax forfeiture page,2026-06-01,high
-Olmsted,Olmsted County Tax-Forfeited Property,https://www.olmstedcounty.gov/business/business-licensing-permits/sales/tax-forfeited-property#land-auctions__open--121118826,,county_webpage,Dedicated tax-forfeited property page with anchor to land auctions,2026-06-01,high
-Otter Tail,Otter Tail County Tax-Forfeited Lands,https://ottertailcountymn.us/content-page/tax-forfeited-lands/,,county_webpage,Dedicated tax-forfeited lands page,2026-06-01,high
-Pennington,Pennington County Treasurer,https://co.pennington.mn.us/index.php/services/treasurer,,county_webpage,General treasurer services page,2026-06-01,medium
-Pine,Pine County Tax Forfeited Land,https://www.co.pine.mn.us/departments/land/tax_forfeited_land_for_sale.php,,county_webpage,Dedicated tax forfeited land for sale page,2026-06-01,high
-Pipestone,Pipestone County Property Tax,https://www.pipestone-county.com/government/departments/assessor/property_tax.php,,county_webpage,General property tax page under assessor,2026-06-01,medium
-Polk,Polk County Forfeited Property,https://www.co.polk.mn.us/190/Forfeited-Property-Currently-for-Sale,https://www.co.polk.mn.us/192/Forfeited-Property-Auctions,county_webpage,Two pages: current properties and auctions,2026-06-01,high
-Pope,Pope County Public Notice,https://pctribune.com/2023/11/notice-of-public-sale-of-tax-forfeited-lands/,,public_notice_page,Posted via newspaper (Pope County Tribune); may be outdated,2026-06-01,low
-Ramsey,Ramsey County Tax-Forfeited Property,https://www.ramseycounty.us/residents/property-home/property-sales/tax-forfeited-auctions,https://www.ramseycounty.us/residents/property-home/property-sales/tax-forfeited-public-sales,county_webpage,Two pages: tax-forfeited auctions and public sales,2026-06-01,high
-Red Lake,Red Lake County Property Tax,https://www.co.red-lake.mn.us/propertytax,,county_webpage,General property tax page,2026-06-01,medium
-Redwood,Redwood County Auditor-Treasurer,https://redwoodcounty-mn.us/departments/auditor-treasurer/,,county_webpage,General auditor-treasurer page,2026-06-01,medium
-Renville,Renville County Tax Forfeited Lands FAQ,https://www.renvillecountymn.gov/departments/auditor_tresurer/frequently_asked_questions_about_tax_forfeited_lands.php,,county_webpage,FAQ page about tax forfeited lands,2026-06-01,medium
-Rice,Rice County Property Values and Taxes,https://www.ricecountymn.gov/249/Property-values-and-taxes,,county_webpage,General property values and taxes page,2026-06-01,medium
-Rock,Rock County Homepage,https://www.co.rock.mn.us/index.php,,county_webpage,County homepage; no dedicated tax forfeiture page found,2026-06-01,low
-Roseau,Roseau County Assessor,https://www.co.roseau.mn.us/government/a_-_e/assessor/index.php,,county_webpage,General assessor page,2026-06-01,medium
-Saint Louis,St. Louis County Tax-Forfeited Land Sales,https://www.stlouiscountymn.gov/departments-a-z/land-minerals/sales-and-contracts/tax-forfeited-land-sales,,county_webpage,Dedicated tax-forfeited land sales page,2026-06-01,high
-Scott,Scott County Tax-Forfeited Properties,https://www.scottcountymn.gov/DocumentCenter/View/11302/Tax-Forfeited-Properties-for-Sale,https://www.scottcountymn.gov/1163/Property-Taxation-Services,pdf_page,Primary link is a PDF; secondary is property taxation services page,2026-06-01,medium
-Sherburne,Sherburne County Tax-Forfeited Parcels,https://www.co.sherburne.mn.us/232/Tax-Forfeited-Parcels,,county_webpage,Dedicated tax-forfeited parcels page,2026-06-01,high
-Sibley,Sibley County Tax Forfeited Property,https://www.co.sibley.mn.us/government/departments/auditor/tax_forfeited_property.php,https://www.sibleycounty.gov/238/Property-Tax,county_webpage,Two URLs: old and new county domain,2026-06-01,medium
-Stearns,Stearns County Tax-Forfeited Property,https://www.stearnscountymn.gov/691/Tax-Forfeited-Property,,county_webpage,Dedicated tax-forfeited property page,2026-06-01,high
-Steele,Steele County Tax Forfeited Properties,https://www.co.steele.mn.us/divisions/land_use_and_records/auditor/tax_forfeited_properties_for_sale.php,,county_webpage,Dedicated tax forfeited properties for sale page,2026-06-01,high
-Stevens,Stevens County Assessor,https://www.co.stevens.mn.us/888/Assessor,,county_webpage,General assessor page,2026-06-01,medium
-Swift,Swift County Land Sales,https://www.swiftcounty.com/?SEC=9AEC2D5E-FE05-4C53-B5C9-5F1C373DF2A1,,county_webpage,Section-based URL on county site,2026-06-01,medium
-Todd,Todd County Auditor-Treasurer,https://www.co.todd.mn.us/divisions/property-records/auditor-treasurer/#1536095103838-5b7732a8-e005,,county_webpage,Auditor-treasurer page with anchor section,2026-06-01,medium
-Traverse,Traverse County Assessor,https://www.co.traverse.mn.us/departments/departments/assessor/,,county_webpage,General assessor page,2026-06-01,medium
-Wabasha,Wabasha County Tax Forfeited Property Sale,https://www.co.wabasha.mn.us/departments/auditor_treasurer/tax_forfeited_property_sale.php,,county_webpage,Dedicated tax forfeited property sale page,2026-06-01,high
-Wadena,Wadena County Tax-Forfeited Land,http://www.co.wadena.mn.us/322/Tax-Forfeited-Land,,county_webpage,Dedicated tax-forfeited land page; HTTP only,2026-06-01,high
-Waseca,Waseca County Assessor's Office,https://www.wasecacounty.gov/103/Assessors-Office,,county_webpage,General assessor's office page,2026-06-01,medium
-Washington,Washington County Sale Information,https://www.co.washington.mn.us/1446/Sale-Information,,county_webpage,Dedicated sale information page,2026-06-01,high
-Watonwan,Watonwan County Tax-Forfeited Sale,https://www.co.watonwan.mn.us/130/Tax-Forfeited-Sale,,county_webpage,Dedicated tax-forfeited sale page,2026-06-01,high
-Wilkin,Wilkin County Auditor-Treasurer,https://www.co.wilkin.mn.us/auditortreasurer,,county_webpage,General auditor-treasurer page,2026-06-01,medium
-Winona,Winona County Forfeited Tax Sales,https://www.co.winona.mn.us/179/Forfeited-Tax-Sales,,county_webpage,Dedicated forfeited tax sales page,2026-06-01,high
-Wright,Wright County Tax Forfeiture,https://www.co.wright.mn.us/191/Tax-Forfeiture,,county_webpage,Dedicated tax forfeiture page,2026-06-01,high
-Yellow Medicine,Yellow Medicine County Land Sales,https://www.co.ym.mn.gov/index.asp?SEC=D7845C79-6866-43C2-81C3-44B92DBEA6F2,,county_webpage,Section-based URL on county site,2026-06-01,medium
-DNR,Minnesota DNR Land Sales,https://www.dnr.state.mn.us/lands_minerals/landsale/index.html,,other,State DNR land and mineral sales page,2026-06-01,high
-MN DOT,Minnesota DOT Property Sales,https://www.dot.state.mn.us/row/propsales.html,,other,MnDOT right-of-way property sales page,2026-06-01,high
-Wisconsin,Wisconsin Surplus,https://www.wisconsinsurplus.com,,auction_platform,Wisconsin surplus auction platform; not MN but tracked per user request,2026-06-01,medium
+Aitkin,Aitkin County Land Department,https://www.co.aitkin.mn.us/departments/Land/LandSaleNotice.html#gsc.tab=0,https://www.co.aitkin.mn.us/departments/land/land-sales.php,county_webpage,Two pages: land sale notice and land sales listing,2026-06-08,high
+Anoka,Anoka County Tax-Forfeited Land Sales,https://www.anokacounty.us/310/Tax-Forfeited-Land-Sales,,county_webpage,Dedicated tax-forfeited land sales page,2026-06-08,high
+Becker,Becker County Natural Resource Management,https://www.co.becker.mn.us/dept/natural_resource/tax_forfeited_sales.aspx,,county_webpage,Dedicated tax forfeited sales page,2026-06-08,high
+Beltrami,Beltrami County Business Development,https://www.co.beltrami.mn.us/business-development/tax-forfeited-land-sales/,,county_webpage,Dedicated tax-forfeited land sales page,2026-06-08,high
+Benton,Benton County Tax-Forfeited Properties,https://www.co.benton.mn.us/187/Tax-Forfeited-Properties,,county_webpage,Dedicated tax-forfeited properties page,2026-06-08,high
+Big Stone,Big Stone County Auditor-Treasurer,https://bigstonecounty.gov/departments/auditor-treasurer/forfeited-land/,,county_webpage,Forfeited land page under auditor-treasurer,2026-06-08,high
+Blue Earth,Blue Earth County Tax Forfeiture,https://www.blueearthcountymn.gov/463/Tax-Forfeiture,,county_webpage,Dedicated tax forfeiture page,2026-06-08,high
+Brown,Brown County Property Sale,https://www.co.brown.mn.us/183/General-Auction-Property-Sale-Informatio,,county_webpage,General auction/property sale information page,2026-06-08,high
+Carlton,Carlton County Land Department,https://www.co.carlton.mn.us/163/Land-Department,,county_webpage,Land department main page,2026-06-08,medium
+Carver,Carver County Tax Forfeiture Sale,https://www.co.carver.mn.us/departments/property-finance/property-tax/tax-forfeiture-sale,,county_webpage,Dedicated tax forfeiture sale page,2026-06-08,high
+Cass,Cass County Land Sales,https://www.casscountymn.gov/1339/Land-Sales,,county_webpage,Dedicated land sales page,2026-06-08,high
+Chippewa,Chippewa County Tax Forfeiture List,https://www.co.chippewa.mn.us/311/Tax-Forfeiture-List,,county_webpage,Dedicated tax forfeiture list page,2026-06-08,high
+Chisago,Chisago County Tax-Forfeited Land,https://www.chisagocounty.us/161/Tax-Forfeited-Land,,county_webpage,Dedicated tax-forfeited land page,2026-06-08,high
+Clay,Clay County Forfeiture Property for Sale,https://claycountymn.gov/290/Forfeiture-Property-for-Sale,,county_webpage,Dedicated forfeiture property page,2026-06-08,high
+Clearwater,Clearwater County Land Sales,https://www.co.clearwater.mn.us/index.asp?SEC=49B3D327-94F9-4B4A-B2D1-3B8A64A59AAF,,county_webpage,Section-based URL on county site,2026-06-08,medium
+Cook,Cook County Auditor-Treasurer,https://www.co.cook.mn.us/government/departments/auditor_treasurer/tax_forfeited_land_sales.php,,county_webpage,Dedicated tax forfeited land sales page,2026-06-08,high
+Cottonwood,Cottonwood County Tax Forfeiture,https://www.co.cottonwood.mn.us/departments/administrative/auditor_treasurer/tax_forfeiture/index.php,,county_webpage,Dedicated tax forfeiture page,2026-06-08,high
+Crow Wing,Crow Wing County Land Sales,https://crowwing.us/269/Land-Sales,,county_webpage,Dedicated land sales page,2026-06-08,high
+Dakota,Dakota County Forfeited Property,https://www.co.dakota.mn.us/HomeProperty/Forfeited,,county_webpage,Dedicated forfeited property page,2026-06-08,high
+Dodge,Dodge County Tax-Forfeited Property,https://www.co.dodge.mn.us/departments/adminstration/tax-forfeited_property.php,,county_webpage,Dedicated tax-forfeited property page,2026-06-08,high
+Douglas,Douglas County Tax-Forfeited Land,https://www.co.douglas.mn.us/tax-forfeited-land,,county_webpage,Dedicated tax-forfeited land page,2026-06-08,high
+Faribault,Faribault County Auditor-Treasurer,https://www.co.faribault.mn.us/auditor-treasurer/pages/tax-forfeiture-land-sale-information,,county_webpage,Tax forfeiture land sale information page,2026-06-08,high
+Fillmore,Fillmore County Tax Forfeited Land Sales,https://www.co.fillmore.mn.us/departments/auditor_treasurer/tax_forfeited_land_sales.php,,county_webpage,Dedicated tax forfeited land sales page,2026-06-08,high
+Freeborn,Freeborn County Forfeiture Property,https://www.co.freeborn.mn.us/168/Forfeiture-Property,,county_webpage,Dedicated forfeiture property page,2026-06-08,high
+Goodhue,Goodhue County Tax-Forfeited Land,https://www.co.goodhue.mn.us/719/Tax-Forfeited-Land,,county_webpage,Dedicated tax-forfeited land page,2026-06-08,high
+Grant,Grant County Tax Forfeiture Properties,https://www.co.grant.mn.us/371/Tax-Forfeiture-PropertiesFor-Immediate-S,,county_webpage,Tax forfeiture properties for immediate sale page,2026-06-08,high
+Hennepin,Hennepin County Tax-Forfeited Land,https://www.hennepin.us/residents/property/tax-forfeited-land,,county_webpage,Dedicated tax-forfeited land page,2026-06-08,high
+Houston,Houston County Auditor-Treasurer,https://www.co.houston.mn.us/departments/auditor-treasurer/,https://www.co.houston.mn.us/departments/auditor-treasurer/,county_webpage,General auditor-treasurer page; both links are the same,2026-06-08,medium
+Hubbard,Hubbard County Tax-Forfeited Land,https://co.hubbard.mn.us/tfl,,county_webpage,Short URL for tax-forfeited land page,2026-06-08,high
+Isanti,Isanti County Tax-Forfeited Property,https://www.co.isanti.mn.us/228/Tax-Forfeited-Property,,county_webpage,Dedicated tax-forfeited property page,2026-06-08,high
+Itasca,Itasca County Tax Forfeit Land,https://www.co.itasca.mn.us/616/Tax-Forfeit-Land,https://www.co.itasca.mn.us/304/Real-Estate,county_webpage,Two pages: tax forfeit land and real estate,2026-06-08,high
+Jackson,Jackson County Auditor,https://www.co.jackson.mn.us/auditor,,county_webpage,General auditor page,2026-06-08,medium
+Kanabec,Kanabec County Tax Forfeit Land Sale,https://www.kanabeccounty.org/departments/tax_forfeit_land_sale.php,,county_webpage,Dedicated tax forfeit land sale page,2026-06-08,high
+Kandiyohi,Kandiyohi County Tax Forfeited Lands,https://www.kcmn.us/departments/auditor_treasurer/tax_forfeited_lands_for_sale.php,,county_webpage,Dedicated tax forfeited lands for sale page,2026-06-08,high
+Kittson,Kittson County Taxpayer Services,https://www.co.kittson.mn.us/government/departments/taxpayer_services.php,,county_webpage,General taxpayer services page,2026-06-08,medium
+Koochiching,Koochiching County Tax-Forfeited Land Sales,https://www.co.koochiching.mn.us/259/Tax-Forfeited-Land-Sales,,county_webpage,Dedicated tax-forfeited land sales page,2026-06-08,high
+Lac qui Parle,Lac qui Parle County Forfeited Properties,https://www.lqpco.com/319/Forfeited-Properties,,county_webpage,Dedicated forfeited properties page,2026-06-08,high
+Lake,Lake County Land Sales,https://www.co.lake.mn.us/forestry/land-sales/,,county_webpage,Land sales page under forestry department,2026-06-08,high
+Lake of the Woods,Lake of the Woods County Land Sales,https://www.co.lake-of-the-woods.mn.us/auditor/property-taxes/,https://www.co.lake-of-the-woods.mn.us/community/land-sales/,county_webpage,Two pages: auditor property taxes and community land sales,2026-06-08,high
+Le Sueur,Le Sueur County Auditor-Treasurer,https://www.co.le-sueur.mn.us/DocumentCenter/View/139/Forfeit-Property-for-Sale-PDF,https://www.co.le-sueur.mn.us/185/Auditor-Treasurer-Office,pdf_page,Primary link is a PDF document; secondary is auditor-treasurer office page,2026-06-08,medium
+Lincoln,Lincoln County Auditor-Treasurer,http://www.co.lincoln.mn.us/Departments/AuditorTreasurer.html,,county_webpage,General auditor-treasurer page; HTTP only,2026-06-08,medium
+Lyon,Lyon County Tax-Forfeited Land,https://www.lyonco.org/departments/auditor-treasurer/tax-forfeited-land,,county_webpage,Dedicated tax-forfeited land page,2026-06-08,high
+Mahnomen,Mahnomen County Taxpayer Services,https://co.mahnomen.mn.us/taxpayer,,county_webpage,General taxpayer services page,2026-06-08,medium
+Marshall,Marshall County Auditor-Treasurer,https://www.co.marshall.mn.us/departments/auditor-treasurer/index.php,,county_webpage,General auditor-treasurer page,2026-06-08,medium
+Martin,Martin County Tax Forfeited Land,https://www.co.martin.mn.us/your_government/departments/auditor_treasurer/tax_forfeited_land.php,,county_webpage,Dedicated tax forfeited land page,2026-06-08,high
+McLeod,McLeod County Tax Forfeited Property,https://www.co.mcleod.mn.us/government/auditor-treasurer/tax_forfeited_property.php,,county_webpage,Dedicated tax forfeited property page,2026-06-08,high
+Meeker,Meeker County Tax Forfeit Property,https://www.co.meeker.mn.us/336/Tax-Forfeit-Property,,county_webpage,Dedicated tax forfeit property page,2026-06-08,high
+Mille Lacs,Mille Lacs County Tax-Forfeited Property,https://www.millelacs.mn.gov/2700/Tax-Forfeited-Property,,county_webpage,Dedicated tax-forfeited property page,2026-06-08,high
+Morrison,Morrison County Land,https://www.co.morrison.mn.us/283/Land,,county_webpage,Land department page,2026-06-08,medium
+Mower,Mower County Tax-Forfeited Properties,https://www.co.mower.mn.us/191/Tax-Forfeited-Properties-For-Sale,,county_webpage,Dedicated tax-forfeited properties for sale page,2026-06-08,high
+Murray,Murray County Land Sales,https://www.murray-countymn.com/_T7_R319.php,,county_webpage,County webpage with non-standard URL pattern,2026-06-08,medium
+Nicollet,Nicollet County Tax-Forfeited Properties,https://www.co.nicollet.mn.us/170/Tax-Forfeited-Properties,,county_webpage,Dedicated tax-forfeited properties page,2026-06-08,high
+Nobles,Nobles County Public Sale Notice,https://www.co.nobles.mn.us/notice-of-public-sale-of-tax-forfeited-lands/,,county_webpage,Public sale notice page,2026-06-08,high
+Norman,Norman County Tax Forfeiture,https://www.co.norman.mn.us/departments/auditor-treasurer/tax_forfeiture.php,,county_webpage,Dedicated tax forfeiture page,2026-06-08,high
+Olmsted,Olmsted County Tax-Forfeited Property,https://www.olmstedcounty.gov/business/business-licensing-permits/sales/tax-forfeited-property#land-auctions__open--121118826,,county_webpage,Dedicated tax-forfeited property page with anchor to land auctions,2026-06-08,high
+Otter Tail,Otter Tail County Tax-Forfeited Lands,https://ottertailcountymn.us/content-page/tax-forfeited-lands/,,county_webpage,Dedicated tax-forfeited lands page,2026-06-08,high
+Pennington,Pennington County Treasurer,https://co.pennington.mn.us/index.php/services/treasurer,,county_webpage,General treasurer services page,2026-06-08,medium
+Pine,Pine County Tax Forfeited Land,https://www.co.pine.mn.us/departments/land/tax_forfeited_land_for_sale.php,,county_webpage,Dedicated tax forfeited land for sale page,2026-06-08,high
+Pipestone,Pipestone County Property Tax,https://www.pipestone-county.com/government/departments/assessor/property_tax.php,,county_webpage,General property tax page under assessor,2026-06-08,medium
+Polk,Polk County Forfeited Property,https://www.co.polk.mn.us/190/Forfeited-Property-Currently-for-Sale,https://www.co.polk.mn.us/192/Forfeited-Property-Auctions,county_webpage,Two pages: current properties and auctions,2026-06-08,high
+Pope,Pope County Public Notice,https://pctribune.com/2023/11/notice-of-public-sale-of-tax-forfeited-lands/,,public_notice_page,Posted via newspaper (Pope County Tribune); may be outdated,2026-06-08,low
+Ramsey,Ramsey County Tax-Forfeited Property,https://www.ramseycounty.us/residents/property-home/property-sales/tax-forfeited-auctions,https://www.ramseycounty.us/residents/property-home/property-sales/tax-forfeited-public-sales,county_webpage,Two pages: tax-forfeited auctions and public sales,2026-06-08,high
+Red Lake,Red Lake County Property Tax,https://www.co.red-lake.mn.us/propertytax,,county_webpage,General property tax page,2026-06-08,medium
+Redwood,Redwood County Auditor-Treasurer,https://redwoodcounty-mn.us/departments/auditor-treasurer/,,county_webpage,General auditor-treasurer page,2026-06-08,medium
+Renville,Renville County Tax Forfeited Lands FAQ,https://www.renvillecountymn.gov/departments/auditor_tresurer/frequently_asked_questions_about_tax_forfeited_lands.php,,county_webpage,FAQ page about tax forfeited lands,2026-06-08,medium
+Rice,Rice County Property Values and Taxes,https://www.ricecountymn.gov/249/Property-values-and-taxes,,county_webpage,General property values and taxes page,2026-06-08,medium
+Rock,Rock County Homepage,https://www.co.rock.mn.us/index.php,,county_webpage,County homepage; no dedicated tax forfeiture page found,2026-06-08,low
+Roseau,Roseau County Assessor,https://www.co.roseau.mn.us/government/a_-_e/assessor/index.php,,county_webpage,General assessor page,2026-06-08,medium
+Saint Louis,St. Louis County Tax-Forfeited Land Sales,https://www.stlouiscountymn.gov/departments-a-z/land-minerals/sales-and-contracts/tax-forfeited-land-sales,,county_webpage,Dedicated tax-forfeited land sales page,2026-06-08,high
+Scott,Scott County Tax-Forfeited Properties,https://www.scottcountymn.gov/DocumentCenter/View/11302/Tax-Forfeited-Properties-for-Sale,https://www.scottcountymn.gov/1163/Property-Taxation-Services,pdf_page,Primary link is a PDF; secondary is property taxation services page,2026-06-08,medium
+Sherburne,Sherburne County Tax-Forfeited Parcels,https://www.co.sherburne.mn.us/232/Tax-Forfeited-Parcels,,county_webpage,Dedicated tax-forfeited parcels page,2026-06-08,high
+Sibley,Sibley County Tax Forfeited Property,https://www.co.sibley.mn.us/government/departments/auditor/tax_forfeited_property.php,https://www.sibleycounty.gov/238/Property-Tax,county_webpage,Two URLs: old and new county domain,2026-06-08,medium
+Stearns,Stearns County Tax-Forfeited Property,https://www.stearnscountymn.gov/691/Tax-Forfeited-Property,,county_webpage,Dedicated tax-forfeited property page,2026-06-08,high
+Steele,Steele County Tax Forfeited Properties,https://www.co.steele.mn.us/divisions/land_use_and_records/auditor/tax_forfeited_properties_for_sale.php,,county_webpage,Dedicated tax forfeited properties for sale page,2026-06-08,high
+Stevens,Stevens County Assessor,https://www.co.stevens.mn.us/888/Assessor,,county_webpage,General assessor page,2026-06-08,medium
+Swift,Swift County Land Sales,https://www.swiftcounty.com/?SEC=9AEC2D5E-FE05-4C53-B5C9-5F1C373DF2A1,,county_webpage,Section-based URL on county site,2026-06-08,medium
+Todd,Todd County Auditor-Treasurer,https://www.co.todd.mn.us/divisions/property-records/auditor-treasurer/#1536095103838-5b7732a8-e005,,county_webpage,Auditor-treasurer page with anchor section,2026-06-08,medium
+Traverse,Traverse County Assessor,https://www.co.traverse.mn.us/departments/departments/assessor/,,county_webpage,General assessor page,2026-06-08,medium
+Wabasha,Wabasha County Tax Forfeited Property Sale,https://www.co.wabasha.mn.us/departments/auditor_treasurer/tax_forfeited_property_sale.php,,county_webpage,Dedicated tax forfeited property sale page,2026-06-08,high
+Wadena,Wadena County Tax-Forfeited Land,http://www.co.wadena.mn.us/322/Tax-Forfeited-Land,,county_webpage,Dedicated tax-forfeited land page; HTTP only,2026-06-08,high
+Waseca,Waseca County Assessor's Office,https://www.wasecacounty.gov/103/Assessors-Office,,county_webpage,General assessor's office page,2026-06-08,medium
+Washington,Washington County Sale Information,https://www.co.washington.mn.us/1446/Sale-Information,,county_webpage,Dedicated sale information page,2026-06-08,high
+Watonwan,Watonwan County Tax-Forfeited Sale,https://www.co.watonwan.mn.us/130/Tax-Forfeited-Sale,,county_webpage,Dedicated tax-forfeited sale page,2026-06-08,high
+Wilkin,Wilkin County Auditor-Treasurer,https://www.co.wilkin.mn.us/auditortreasurer,,county_webpage,General auditor-treasurer page,2026-06-08,medium
+Winona,Winona County Forfeited Tax Sales,https://www.co.winona.mn.us/179/Forfeited-Tax-Sales,,county_webpage,Dedicated forfeited tax sales page,2026-06-08,high
+Wright,Wright County Tax Forfeiture,https://www.co.wright.mn.us/191/Tax-Forfeiture,,county_webpage,Dedicated tax forfeiture page,2026-06-08,high
+Yellow Medicine,Yellow Medicine County Land Sales,https://www.co.ym.mn.gov/index.asp?SEC=D7845C79-6866-43C2-81C3-44B92DBEA6F2,,county_webpage,Section-based URL on county site,2026-06-08,medium
+DNR,Minnesota DNR Land Sales,https://www.dnr.state.mn.us/lands_minerals/landsale/index.html,,other,State DNR land and mineral sales page,2026-06-08,high
+MN DOT,Minnesota DOT Property Sales,https://www.dot.state.mn.us/row/propsales.html,,other,MnDOT right-of-way property sales page,2026-06-08,high
+Wisconsin,Wisconsin Surplus,https://www.wisconsinsurplus.com,,auction_platform,Wisconsin surplus auction platform; not MN but tracked per user request,2026-06-08,medium
