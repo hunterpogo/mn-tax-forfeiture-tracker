@@ -1,12 +1,12 @@
 # Minnesota Tax-Forfeited Land Sale Report
-**Generated:** 2026-07-02 10:40
+**Generated:** 2026-07-02 16:47
 **Counties Checked:** 90
-**Sales Found:** 95
-**Errors/Manual Review:** 1
+**Sales Found:** 94
+**Errors/Manual Review:** 2
 
 ---
 
-## Upcoming Auctions (77)
+## Upcoming Auctions (76)
 _Online, in-person, and sealed-bid sales — scheduled dates first, soonest at top._
 
 | County / Municipality | Sale Type | Date | Time | Location / Platform | Source |
@@ -21,7 +21,7 @@ _Online, in-person, and sealed-bid sales — scheduled dates first, soonest at t
 | Kanabec | Online | 2026-08-05 | TBD | See source | [Link](https://www.kanabeccounty.org/departments/tax_forfeit_land_sale.php) |
 | Kanabec | Online | 2026-08-06 | TBD | See source | [Link](https://www.kanabeccounty.org/departments/tax_forfeit_land_sale.php) |
 
-**No date extracted (68)** — sale activity detected but no specific date found; check the source link:
+**No date extracted (67)** — sale activity detected but no specific date found; check the source link:
 
 | County / Municipality | Sale Type | Date | Time | Location / Platform | Source |
 |---|---|---|---|---|---|
@@ -66,7 +66,6 @@ _Online, in-person, and sealed-bid sales — scheduled dates first, soonest at t
 | Nobles | In Person | TBD | 9:00 AM | Nobles County Government Center, 315 10th Street, Worthington MN | [Link](https://www.co.nobles.mn.us/notice-of-public-sale-of-tax-forfeited-lands/) |
 | Norman | Online | TBD | TBD | See source | [Link](https://www.co.norman.mn.us/departments/auditor-treasurer/tax_forfeiture.php) |
 | Olmsted | Online | TBD | TBD | See source | [Link](https://www.olmstedcounty.gov/business/business-licensing-permits/sales/tax-forfeited-property#land-auctions__open--121118826) |
-| Otter Tail | Unknown | TBD | 8:00 a.m. | See source | [Link](https://ottertailcounty.gov/property-home/property-sales/tax-forfeited-lands/) |
 | Pennington | Unknown | TBD | TBD | See source | [Link](https://co.pennington.mn.us/index.php/services/treasurer) |
 | Polk | Unknown | TBD | TBD | See source | [Link](https://www.co.polk.mn.us/190/Forfeited-Property-Currently-for-Sale) |
 | Pope | In Person | TBD | TBD | See source | [Link](https://www.popecountymn.gov/?s=tax+forfeited) |
@@ -573,15 +572,6 @@ _Ongoing/repurchase sales available at fixed price — scheduled dates first, so
 - **Deadlines/Notes:** Date not extracted - manual review needed
 - **Excerpt:** age. Statement of Claim for Surplus Proceeds from Tax Forfeited Land Sale This item appears in Property Taxes Share this page Online Property Information Residents Business Government I Want To I Want...
 
-### Otter Tail
-- **Sale type:** Unknown
-- **Date:** TBD
-- **Time:** 8:00 a.m.
-- **Location:** See source
-- **Source:** [https://ottertailcounty.gov/property-home/property-sales/tax-forfeited-lands/](https://ottertailcounty.gov/property-home/property-sales/tax-forfeited-lands/)
-- **Deadlines/Notes:** Date not extracted - manual review needed
-- **Excerpt:** r Tail County is prohibited from purchasing state tax forfeited land. If you are interested in purchasing tax-forfeited property, you must pay all your delinquent taxes prior to bidding or purchasing....
-
 ### Pennington
 - **Sale type:** Unknown
 - **Date:** TBD
@@ -985,16 +975,18 @@ Lincoln, Marshall, Murray, Pipestone, Redwood, Rice, Rock, Roseau, Traverse, Wis
 
 ---
 
-## Counties Needing Manual Review (1 entries)
+## Counties Needing Manual Review (2 entries)
 
 | County | URL | Issue | Suggested Action |
 |---|---|---|---|
-| Hennepin | [Link](https://public-hennepin.epropertyplus.com/) | SSL certificate problem | Open in a browser to verify the site; certificate may be expired |
+| Hennepin | [Link](https://public-hennepin.epropertyplus.com/) | Page loads but has no readable text | Content is likely rendered by JavaScript - check the URL in a browser |
+| Otter Tail | [Link](https://ottertailcounty.gov/property-home/property-sales/tax-forfeited-lands/) | Access denied (403) | Site is blocking automated checks - open the URL in a browser; if it works there, the county's firewall blocks this checker |
 
 ---
 
 ## Check Statistics
 
-- error_ssl_error: 1
+- error_http_403: 1
+- needs_manual_review: 1
 - no_sale_found: 16
-- sale_found: 94
+- sale_found: 93
