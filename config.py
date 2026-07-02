@@ -4,7 +4,27 @@ from pathlib import Path
 REQUEST_TIMEOUT = 30
 RATE_LIMIT_DELAY = 2.0
 MAX_RETRIES = 2
-USER_AGENT = "MN-Tax-Forfeiture-Tracker/1.0 (personal research)"
+# Browser-like UA: several county WAFs 403 obvious bot UAs. Volume stays low
+# (one pass/week, rate-limited), so this remains polite scraping.
+USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+)
+# Full browser-like header set: Akamai-protected county sites (e.g. Carver)
+# 403 requests that carry only a User-Agent.
+REQUEST_HEADERS = {
+    "User-Agent": USER_AGENT,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,application/pdf;q=0.8,*/*;q=0.7",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "sec-ch-ua": '"Chromium";v="126", "Not/A)Brand";v="8", "Google Chrome";v="126"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"macOS"',
+}
 
 # ---- Paths ----
 PROJECT_ROOT = Path(__file__).parent
@@ -40,7 +60,9 @@ DATE_PATTERNS = [
     r"\b(\d{4}-\d{2}-\d{2})\b",
 ]
 
-TIME_PATTERN = r"\b(\d{1,2}:\d{2}\s*(?:AM|PM|am|pm|a\.m\.|p\.m\.)?)\b"
+# [ \t] only: \s would let a newline into the captured value and break
+# markdown table rows. am/pm required so bare clock fragments don't match.
+TIME_PATTERN = r"\b(\d{1,2}:\d{2}[ \t]*(?:AM|PM|am|pm|a\.m\.|p\.m\.))"
 
 # ---- Sale Type Keyword Maps ----
 SALE_TYPE_INDICATORS = {
@@ -66,19 +88,43 @@ SALE_TYPE_INDICATORS = {
 
 # ---- Location Trigger Phrases ----
 LOCATION_TRIGGERS = [
-    r"(?:held at|auction (?:at|held)|sale (?:at|held)|location:\s*)(?:the\s+)?(.{10,120}?)(?:\.|;|\n|$)",
-    r"((?:county\s+)?courthouse[^.\n]{0,60})",
-    r"(auditor.s\s+office[^.\n]{0,60})",
-    r"(county\s+(?:board\s+room|building|government\s+center)[^.\n]{0,60})",
+    r"(?:held at|auction (?:at|held)|sale (?:at|held)|location:)\s*(?:the\s+)?([A-Za-z][^.|;\n]{8,100}?)(?:\s*\.|\s*;|\n|$)",
+    r"((?:county\s+)?courthouse[^.|\n]{0,60})",
+    r"(auditor.s\s+office[^.|\n]{0,60})",
+    r"(county\s+(?:board\s+room|building|government\s+center)[^.|\n]{0,60})",
 ]
 
-# ---- Location Exclusion Terms (navigation/boilerplate) ----
+# A candidate location must contain at least one of these place-indicating
+# tokens; the trigger patterns alone capture sentence fragments like
+# "the rate of $3" or "an initial public auction".
+LOCATION_PLACE_TOKENS = [
+    "courthouse", "court house", "office", "center", "centre", "room",
+    "hall", "building", "floor", "chambers", "library", "annex",
+    "street", " st ", " st.", "avenue", " ave", "road", " rd", "drive",
+    " dr ", " dr.", "boulevard", "blvd", "highway", " hwy", "lane",
+    "suite", "campus", "online", "k-bid", "kbid", "govdeals",
+    "publicsurplus", "proxibid", "zoom", "virtual",
+]
+
+# ---- Location Exclusion Terms (navigation/boilerplate/junk) ----
 LOCATION_EXCLUSIONS = [
     "skip to", "main content", "search", "menu", "navigation",
     "click here", "read more", "learn more", "home page",
     "cookie", "privacy", "sign in", "log in",
     "this time", "that time", "no sale", "not available",
-    "subscribe", "volunteer", "apply for", "department",
+    "subscribe", "volunteer", "apply for",
+    "pic -", "cropped", "image", "photo", "logo", "screenshot",
+    "rate of", "market value", "reduced amount", "did not sell",
+    "regular business hours",
+]
+
+# ---- Negative Phrases (page explicitly says nothing is for sale) ----
+# Suppresses the dateless fallback record; dated records are kept.
+NO_SALE_PATTERNS = [
+    r"(?:there are\s+)?currently\s+no\s+tax[- ]?forfeit\w*\s+(?:propert|parcel|land)",
+    r"no\s+(?:propert\w+|parcels?|lands?)\s+(?:are\s+)?(?:currently\s+)?(?:available|for sale|listed)",
+    r"no\s+(?:auction|sale)s?\s+(?:are\s+)?(?:currently\s+)?scheduled",
+    r"next\s+sale\s+has\s+not\s+been\s+scheduled",
 ]
 
 # ---- PDF Settings ----

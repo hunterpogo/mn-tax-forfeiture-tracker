@@ -2,13 +2,20 @@ name: Weekly MN Tax-Forfeited Land Check
 
 on:
   schedule:
-    # Monday 11:00 UTC = 6:00 AM CDT (Mar–Nov) / 5:00 AM CST (Nov–Mar)
-    - cron: '0 11 * * 1'
+    # Monday 11:37 UTC = 6:37 AM CDT (Mar–Nov) / 5:37 AM CST (Nov–Mar).
+    # Odd minute: GitHub delays runs scheduled at popular :00 slots by hours.
+    - cron: '37 11 * * 1'
   workflow_dispatch:  # Allow manual trigger from Actions UI
 
 permissions:
   contents: write
   issues: write
+
+# Serialize runs: a manual trigger during a scheduled run would otherwise race
+# on the git push of reports.
+concurrency:
+  group: weekly-tax-check
+  cancel-in-progress: false
 
 jobs:
   check:
@@ -40,6 +47,8 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Weekly check $(date -u +%Y-%m-%d)"
+            # Rebase in case anything landed on main since checkout
+            git pull --rebase origin main
             git push
           fi
 
@@ -48,62 +57,58 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const date = new Date().toISOString().split('T')[0];
-            const reportPath = `reports/weekly_report_${date}.md`;
 
-            if (!fs.existsSync(reportPath)) {
-              core.setFailed(`Report not found: ${reportPath}`);
+            // Find the newest report by filename (dates sort lexicographically).
+            // Computing "today" here can disagree with the Python run date when
+            // a delayed run crosses midnight UTC.
+            const files = fs.readdirSync('reports')
+              .filter(f => /^weekly_report_\d{4}-\d{2}-\d{2}\.md$/.test(f))
+              .sort();
+            if (!files.length) {
+              core.setFailed('No weekly_report_*.md found in reports/');
               return;
             }
+            const latest = files[files.length - 1];
+            const date = latest.match(/(\d{4}-\d{2}-\d{2})/)[1];
+            const reportPath = `reports/${latest}`;
 
             const full = fs.readFileSync(reportPath, 'utf8');
             const lines = full.split('\n');
+            const findIdx = (needle) => lines.findIndex(l => l.startsWith(needle));
 
-            const findIdx = (needle) => lines.findIndex(l => l.includes(needle));
-            const upcomingIdx = findIdx('## Upcoming Sales');
             const detailsIdx = findIdx('## Details');
-            const noSalesIdx = findIdx('## Counties Checked With No');
             const manualIdx = findIdx('## Counties Needing Manual');
-            const statsIdx = findIdx('## Check Statistics');
-
-            const header = lines.slice(0, upcomingIdx).join('\n');
-            const upcoming = upcomingIdx >= 0 && detailsIdx > upcomingIdx
-              ? lines.slice(upcomingIdx, detailsIdx).join('\n')
-              : '';
-            const noSales = noSalesIdx >= 0 && manualIdx > noSalesIdx
-              ? lines.slice(noSalesIdx, manualIdx).join('\n')
-              : '';
-            const manual = manualIdx >= 0 && statsIdx > manualIdx
-              ? lines.slice(manualIdx, statsIdx).join('\n')
-              : '';
-            const stats = statsIdx >= 0 ? lines.slice(statsIdx).join('\n') : '';
 
             const repoUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}`;
             const reportLink = `${repoUrl}/blob/main/${reportPath}`;
             const csvLink = `${repoUrl}/blob/main/reports/weekly_report_${date}.csv`;
-
-            const body = [
-              header,
-              upcoming,
-              `\n📄 **Full report (with per-county details):** [${reportPath}](${reportLink})`,
+            const links = [
+              `📄 **Full report (per-county details):** [${reportPath}](${reportLink})`,
               `📊 **CSV export:** [weekly_report_${date}.csv](${csvLink})`,
-              '',
-              noSales,
-              '',
-              manual,
-              '',
-              stats,
-            ].filter(Boolean).join('\n');
+            ].join('\n');
 
-            // Cap at 60KB to stay well under GitHub's 65KB issue body limit
-            const capped = body.length > 60000
-              ? body.slice(0, 59800) + '\n\n_...truncated. See full report linked above._'
-              : body;
+            let body;
+            if (detailsIdx > 0 && manualIdx > detailsIdx) {
+              // Summary + both sale tables, then links, then manual review + stats.
+              // The Details section is the bulk of the report; the link covers it.
+              const head = lines.slice(0, detailsIdx).join('\n');
+              const tail = lines.slice(manualIdx).join('\n');
+              body = [head, links, '', '---', '', tail].join('\n');
+            } else {
+              // Section headings changed — fall back to the whole report.
+              core.warning('Expected section headings not found; using full report');
+              body = [full, '', links].join('\n');
+            }
+
+            // Cap at 60KB to stay under GitHub's 65KB issue body limit
+            if (body.length > 60000) {
+              body = body.slice(0, 59800) + '\n\n_...truncated. See full report linked above._';
+            }
 
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: `Weekly MN Tax-Forfeited Land Report — ${date}`,
-              body: capped,
+              body,
               labels: ['weekly-report'],
             });

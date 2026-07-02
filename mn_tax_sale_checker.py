@@ -29,17 +29,20 @@ from bs4 import BeautifulSoup
 from config import (
     DATE_PATTERNS,
     LOCATION_EXCLUSIONS,
+    LOCATION_PLACE_TOKENS,
     LOCATION_TRIGGERS,
     MAX_PDF_PAGES,
     MAX_PDFS_PER_COUNTY,
     MIN_PAGE_TEXT_LENGTH,
     MIN_PDF_TEXT_LENGTH,
+    NO_SALE_PATTERNS,
     PROJECT_ROOT,
     RATE_LIMIT_DELAY,
     MAX_RETRIES,
     REPORTS_DIR,
     LOGS_DIR,
     TEMP_DIR,
+    REQUEST_HEADERS,
     REQUEST_TIMEOUT,
     SALE_KEYWORDS,
     SALE_TYPE_INDICATORS,
@@ -48,11 +51,18 @@ from config import (
     USER_AGENT,
 )
 
+# The SSL fallback path deliberately retries with verify=False; keep the log
+# readable instead of printing one InsecureRequestWarning per retry.
+requests.packages.urllib3.disable_warnings(
+    requests.packages.urllib3.exceptions.InsecureRequestWarning
+)
+
 # ---------------------------------------------------------------------------
 # Data structures
 # ---------------------------------------------------------------------------
 
-FetchResult = namedtuple("FetchResult", ["content", "content_type", "status_code", "error"])
+# `raw` carries the original HTML so PDF-link discovery doesn't need a second request.
+FetchResult = namedtuple("FetchResult", ["content", "content_type", "status_code", "error", "raw"])
 
 
 @dataclass
@@ -111,55 +121,47 @@ log = logging.getLogger("mn_tax_checker")
 # Fetching
 # ---------------------------------------------------------------------------
 
+def _response_to_result(resp: requests.Response, url: str, error: Optional[str]) -> FetchResult:
+    """Convert an HTTP response into extracted text (HTML or PDF)."""
+    content_type = resp.headers.get("Content-Type", "").lower()
+
+    if "pdf" in content_type or url.lower().endswith(".pdf"):
+        text = extract_pdf_from_bytes(resp.content)
+        return FetchResult(text, "pdf", resp.status_code, error, None)
+
+    encoding = resp.apparent_encoding or "utf-8"
+    try:
+        html = resp.content.decode(encoding, errors="replace")
+    except (LookupError, UnicodeDecodeError):
+        html = resp.content.decode("utf-8", errors="replace")
+
+    soup = BeautifulSoup(html, "lxml")
+    for tag in soup(["script", "style", "noscript"]):
+        tag.decompose()
+    text = soup.get_text(separator="\n", strip=True)
+    return FetchResult(text, "html", resp.status_code, error, html)
+
+
 def fetch_page(url: str) -> FetchResult:
     """Fetch a URL and return its text content. Handles HTML and PDF."""
-    headers = {"User-Agent": USER_AGENT}
     last_error = None
 
     for attempt in range(1 + MAX_RETRIES):
         try:
-            resp = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT, allow_redirects=True)
+            resp = requests.get(url, headers=REQUEST_HEADERS, timeout=REQUEST_TIMEOUT,
+                                allow_redirects=True)
             resp.raise_for_status()
-            content_type = resp.headers.get("Content-Type", "").lower()
-
-            if "pdf" in content_type or url.lower().endswith(".pdf"):
-                text = extract_pdf_from_bytes(resp.content)
-                return FetchResult(text, "pdf", resp.status_code, None)
-
-            encoding = resp.apparent_encoding or "utf-8"
-            try:
-                html = resp.content.decode(encoding, errors="replace")
-            except (LookupError, UnicodeDecodeError):
-                html = resp.content.decode("utf-8", errors="replace")
-
-            soup = BeautifulSoup(html, "lxml")
-            for tag in soup(["script", "style", "noscript"]):
-                tag.decompose()
-            text = soup.get_text(separator="\n", strip=True)
-            return FetchResult(text, "html", resp.status_code, None)
+            return _response_to_result(resp, url, None)
 
         except requests.exceptions.Timeout:
             last_error = "timeout"
             log.debug("Timeout on %s (attempt %d)", url, attempt + 1)
         except requests.exceptions.SSLError as e:
             try:
-                resp = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT,
+                resp = requests.get(url, headers=REQUEST_HEADERS, timeout=REQUEST_TIMEOUT,
                                     allow_redirects=True, verify=False)
                 resp.raise_for_status()
-                content_type = resp.headers.get("Content-Type", "").lower()
-                if "pdf" in content_type or url.lower().endswith(".pdf"):
-                    text = extract_pdf_from_bytes(resp.content)
-                    return FetchResult(text, "pdf", resp.status_code, "ssl_warning")
-                encoding = resp.apparent_encoding or "utf-8"
-                try:
-                    html = resp.content.decode(encoding, errors="replace")
-                except (LookupError, UnicodeDecodeError):
-                    html = resp.content.decode("utf-8", errors="replace")
-                soup = BeautifulSoup(html, "lxml")
-                for tag in soup(["script", "style", "noscript"]):
-                    tag.decompose()
-                text = soup.get_text(separator="\n", strip=True)
-                return FetchResult(text, "html", resp.status_code, "ssl_warning")
+                return _response_to_result(resp, url, "ssl_warning")
             except Exception:
                 last_error = f"ssl_error: {e}"
                 break
@@ -169,7 +171,7 @@ def fetch_page(url: str) -> FetchResult:
         except requests.exceptions.HTTPError as e:
             status = e.response.status_code if e.response is not None else 0
             last_error = f"http_{status}"
-            return FetchResult(None, None, status, last_error)
+            return FetchResult(None, None, status, last_error, None)
         except Exception as e:
             last_error = f"error: {e}"
             break
@@ -177,7 +179,7 @@ def fetch_page(url: str) -> FetchResult:
         if attempt < MAX_RETRIES:
             time.sleep(2 ** (attempt + 1))
 
-    return FetchResult(None, None, None, last_error)
+    return FetchResult(None, None, None, last_error, None)
 
 
 def extract_pdf_from_bytes(pdf_bytes: bytes) -> str:
@@ -214,11 +216,16 @@ def find_pdf_links(html_text: str, base_url: str) -> List[str]:
 # ---------------------------------------------------------------------------
 
 def extract_dates(text: str) -> List[Tuple[Optional[date], str]]:
-    """Extract dates from text, returning (parsed_date, raw_string) pairs."""
+    """Extract future dates from text, returning (parsed_date, raw_string) pairs.
+
+    Only today-or-later dates qualify: a "sale" whose only date is in the past
+    is stale content, not an upcoming sale. An 18-month horizon guards against
+    typos (e.g. 2062) and copyright years matched out of context.
+    """
     results = []
     seen_raw = set()
     today = date.today()
-    cutoff_past = today - timedelta(days=7)
+    horizon = today + timedelta(days=550)
 
     for pattern in DATE_PATTERNS:
         for match in re.finditer(pattern, text, re.IGNORECASE):
@@ -227,7 +234,7 @@ def extract_dates(text: str) -> List[Tuple[Optional[date], str]]:
                 continue
             seen_raw.add(raw)
             parsed = try_parse_date(raw)
-            if parsed and parsed >= cutoff_past:
+            if parsed and today <= parsed <= horizon:
                 results.append((parsed, raw))
 
     results.sort(key=lambda x: x[0] or today)
@@ -253,10 +260,35 @@ def try_parse_date(raw: str) -> Optional[date]:
     return None
 
 
-def extract_time(text: str) -> Optional[str]:
-    """Extract the first time mention from text."""
-    m = re.search(TIME_PATTERN, text, re.IGNORECASE)
-    return m.group(1).strip() if m else None
+def _first_standalone_time(segment: str) -> Optional[str]:
+    """First time in segment that is not part of an hours range like 8:00am-4:30pm."""
+    for m in re.finditer(TIME_PATTERN, segment, re.IGNORECASE):
+        tail = segment[m.end():m.end() + 12]
+        if re.match(r"\s*(?:[-–—]|to\b)\s*\d{1,2}:\d{2}", tail, re.IGNORECASE):
+            continue  # start of a range
+        head = segment[max(0, m.start() - 12):m.start()]
+        if re.search(r"\d{1,2}:\d{2}\s*(?:am|pm|a\.m\.|p\.m\.)?\s*(?:[-–—]|to)\s*$", head, re.IGNORECASE):
+            continue  # end of a range
+        return " ".join(m.group(1).split())
+    return None
+
+
+def extract_time(text: str, near: Optional[str] = None) -> Optional[str]:
+    """Extract a sale time from text.
+
+    When `near` (a raw date string) is given, only a time close to that date
+    counts — an unanchored search pairs page-render timestamps and
+    business-hours boilerplate with unrelated dates. Text after the date is
+    preferred ("on June 5, 2026 at 10:00 am" is the dominant phrasing).
+    """
+    if near:
+        idx = text.find(near)
+        if idx == -1:
+            return None
+        after = text[idx + len(near):idx + len(near) + 150]
+        before = text[max(0, idx - 150):idx]
+        return _first_standalone_time(after) or _first_standalone_time(before)
+    return _first_standalone_time(text)
 
 
 def extract_location(text: str) -> Optional[str]:
@@ -270,7 +302,13 @@ def extract_location(text: str) -> Optional[str]:
             loc_lower = loc.lower()
             if any(excl in loc_lower for excl in LOCATION_EXCLUSIONS):
                 continue
-            return loc[:120]
+            if not any(tok in f" {loc_lower} " for tok in LOCATION_PLACE_TOKENS):
+                continue
+            if len(loc) > 120:
+                cut = loc[:120]
+                space = cut.rfind(" ")
+                loc = cut[:space] if space > 80 else cut
+            return loc
     return None
 
 
@@ -310,6 +348,19 @@ def extract_context_windows(text: str, keyword: str, window: int = 500) -> List[
     return windows
 
 
+def is_stale_source(url: str) -> Optional[int]:
+    """Return the year if the URL is an archived notice from a prior year.
+
+    Newspaper archives and dated notice pages (e.g. /2023/11/notice-of-...)
+    keep matching sale keywords forever; any date they yield comes from
+    sidebar/boilerplate, not the notice itself.
+    """
+    m = re.search(r"/(20\d{2})/", urlparse(url).path)
+    if m and int(m.group(1)) < date.today().year:
+        return int(m.group(1))
+    return None
+
+
 def search_for_sales(text: str, county: str, url: str, source_type: str) -> List[SaleRecord]:
     """Search page text for tax-forfeited sale announcements."""
     if not text:
@@ -321,6 +372,11 @@ def search_for_sales(text: str, county: str, url: str, source_type: str) -> List
     if not matched_keywords:
         return []
 
+    stale_year = is_stale_source(url)
+    if stale_year:
+        log.info("  %s: source is an archived %d notice, skipping (%s)", county, stale_year, url)
+        return []
+
     all_windows = []
     for kw in matched_keywords:
         all_windows.extend(extract_context_windows(text, kw))
@@ -329,8 +385,10 @@ def search_for_sales(text: str, county: str, url: str, source_type: str) -> List
         all_windows = [text[:2000]]
 
     combined_context = "\n".join(all_windows)
+    page_says_no_sale = any(
+        re.search(p, combined_context, re.IGNORECASE) for p in NO_SALE_PATTERNS
+    )
     dates_found = extract_dates(combined_context)
-    time_found = extract_time(combined_context)
     location_found = extract_location(combined_context)
     sale_type = classify_sale_type(combined_context)
 
@@ -356,12 +414,14 @@ def search_for_sales(text: str, county: str, url: str, source_type: str) -> List
 
     records = []
     if dates_found:
-        for sale_date, raw_date in dates_found:
+        # Cap runaway extraction: a page yielding many dates is usually
+        # matching meeting calendars, not listing that many distinct sales.
+        for sale_date, raw_date in dates_found[:5]:
             rec = SaleRecord(
                 county=county,
                 sale_date=sale_date,
                 sale_date_raw=raw_date,
-                sale_time=time_found,
+                sale_time=extract_time(combined_context, near=raw_date),
                 location=location_found,
                 sale_type=sale_type,
                 description=description_snippet,
@@ -371,12 +431,15 @@ def search_for_sales(text: str, county: str, url: str, source_type: str) -> List
             )
             rec.dedup_hash = compute_dedup_hash(county, sale_date, location_found)
             records.append(rec)
+    elif page_says_no_sale:
+        # Page has sale keywords but explicitly says nothing is for sale.
+        log.info("  %s: page states no properties currently for sale", county)
     else:
         rec = SaleRecord(
             county=county,
             sale_date=None,
             sale_date_raw="",
-            sale_time=time_found,
+            sale_time=extract_time(combined_context),
             location=location_found,
             sale_type=sale_type,
             description=description_snippet,
@@ -385,7 +448,9 @@ def search_for_sales(text: str, county: str, url: str, source_type: str) -> List
             online_url=online_url,
             deadlines="Date not extracted - manual review needed",
         )
-        rec.dedup_hash = compute_dedup_hash(county, None, location_found)
+        # Dateless records dedup per county+type: two URLs describing the same
+        # program with different boilerplate would otherwise both survive.
+        rec.dedup_hash = compute_dedup_hash(county, None, sale_type)
         records.append(rec)
 
     return records
@@ -422,10 +487,12 @@ def check_single_url(url: str, county: str, source_type: str) -> Tuple[List[Sale
 
     sales = search_for_sales(result.content, county, url, source_type)
 
-    if result.content_type == "html" and not sales:
-        raw_html = requests.get(url, headers={"User-Agent": USER_AGENT},
-                                timeout=REQUEST_TIMEOUT, allow_redirects=True).text
-        pdf_links = find_pdf_links(raw_html, url)
+    if result.content_type == "html" and not sales and result.raw:
+        try:
+            pdf_links = find_pdf_links(result.raw, url)
+        except Exception as e:
+            log.debug("  %s: PDF link discovery failed: %s", county, e)
+            pdf_links = []
         if pdf_links:
             log.debug("  %s: Found %d PDF links, checking...", county, len(pdf_links))
             for pdf_url in pdf_links:
@@ -484,6 +551,31 @@ def format_sale_type(st: str) -> str:
     return st.replace("_", " ").title()
 
 
+def md_cell(value) -> str:
+    """Make a value safe for a markdown table cell: no pipes, no newlines."""
+    return " ".join(str(value if value is not None else "").split()).replace("|", "\\|")
+
+
+# Human-readable explanation + suggested action per error class, used in the
+# manual-review table so a reader knows what to do without decoding e.g. "http_403".
+ERROR_GUIDANCE = {
+    "error_http_404": ("Page not found (404)", "URL is dead or moved - find the county's current tax-forfeiture page and update the sources CSV"),
+    "error_http_403": ("Access denied (403)", "Site is blocking automated checks - open the URL in a browser; if it works there, the county's firewall blocks this checker"),
+    "error_http_500": ("Server error (500)", "County server problem - usually temporary, check again next week"),
+    "error_http_429": ("Rate limited (429)", "Too many requests - usually temporary"),
+    "error_timeout": ("Request timed out", "Server too slow - open the URL manually; if it never loads, find a replacement source"),
+    "error_connection_error": ("Could not connect", "DNS or network failure - the domain may have changed; search for the county's new website"),
+    "error_ssl_error": ("SSL certificate problem", "Open in a browser to verify the site; certificate may be expired"),
+    "needs_manual_review": ("Page loads but has no readable text", "Content is likely rendered by JavaScript - check the URL in a browser"),
+}
+
+
+def error_guidance(result_code: str, detail: Optional[str]) -> Tuple[str, str]:
+    if result_code in ERROR_GUIDANCE:
+        return ERROR_GUIDANCE[result_code]
+    return (detail or result_code, "Open the source URL manually to investigate")
+
+
 def generate_markdown_report(
     sales: List[SaleRecord],
     log_entries: List[CheckLogEntry],
@@ -492,8 +584,12 @@ def generate_markdown_report(
 ) -> str:
     """Generate the weekly Markdown report."""
 
+    # Past-dated records are dropped up front: a reader opening the report
+    # days after generation should never see a finished sale under "Upcoming".
+    current = [s for s in sales if s.sale_date is None or s.sale_date >= run_date]
+
     error_entries = [e for e in log_entries if "error" in e.result or e.result == "needs_manual_review"]
-    sale_counties = {s.county for s in sales}
+    sale_counties = {s.county for s in current}
     error_counties = {e.county for e in error_entries}
     no_sale_counties = [c for c in all_counties if c not in sale_counties and c not in error_counties]
 
@@ -501,23 +597,22 @@ def generate_markdown_report(
     lines.append(f"# Minnesota Tax-Forfeited Land Sale Report")
     lines.append(f"**Generated:** {run_date.isoformat()} {datetime.now().strftime('%H:%M')}")
     lines.append(f"**Counties Checked:** {len(all_counties)}")
-    lines.append(f"**Sales Found:** {len(sales)}")
+    lines.append(f"**Sales Found:** {len(current)}")
     lines.append(f"**Errors/Manual Review:** {len(error_entries)}")
     lines.append("")
     lines.append("---")
     lines.append("")
 
-    # Split into auctions vs OTC sales, each sorted by soonest date first
-    # OTC = over_the_counter only; Auctions = online / in_person / sealed_bid / unknown
+    # Split into auctions vs OTC sales, each sorted by soonest date first.
+    # OTC = over_the_counter only; Auctions = online / in_person / sealed_bid / unknown.
     def _sort_key(rec):
         return (rec.sale_date or date.max, rec.county)
-
     otc_sales = sorted(
-        [s for s in sales if s.sale_type == "over_the_counter"],
+        [s for s in current if s.sale_type == "over_the_counter"],
         key=_sort_key,
     )
     auction_sales = sorted(
-        [s for s in sales if s.sale_type != "over_the_counter"],
+        [s for s in current if s.sale_type != "over_the_counter"],
         key=_sort_key,
     )
 
@@ -530,7 +625,32 @@ def generate_markdown_report(
             time_str = s.sale_time or "TBD"
             loc_str = s.location or s.online_url or "See source"
             type_str = format_sale_type(s.sale_type)
-            out.append(f"| {s.county} | {type_str} | {date_str} | {time_str} | {loc_str} | [Link]({s.source_url}) |")
+            out.append(
+                f"| {md_cell(s.county)} | {md_cell(type_str)} | {md_cell(date_str)} "
+                f"| {md_cell(time_str)} | {md_cell(loc_str)} | [Link]({s.source_url}) |"
+            )
+        return out
+
+    def _render_split_section(records, title, blurb):
+        """Render a sale bucket as two tables: dated sales first, then undated."""
+        dated = [s for s in records if s.sale_date]
+        undated = [s for s in records if not s.sale_date]
+        out = []
+        out.append(f"## {title} ({len(records)})")
+        out.append(f"_{blurb}_")
+        out.append("")
+        if dated:
+            out.extend(_render_table(dated))
+            out.append("")
+        else:
+            out.append("None with confirmed dates this week.")
+            out.append("")
+        if undated:
+            out.append(f"**No date extracted ({len(undated)})** — sale activity detected but no "
+                       "specific date found; check the source link:")
+            out.append("")
+            out.extend(_render_table(undated))
+            out.append("")
         return out
 
     def _render_details(records):
@@ -546,33 +666,20 @@ def generate_markdown_report(
             out.append(f"- **Source:** [{s.source_url}]({s.source_url})")
             if s.deadlines:
                 out.append(f"- **Deadlines/Notes:** {s.deadlines}")
-            out.append(f"- **Excerpt:** {s.description[:200]}...")
+            out.append(f"- **Excerpt:** {md_cell(s.description[:200])}...")
             out.append("")
         return out
 
-    # === Section 1: Upcoming Auctions ===
-    lines.append(f"## Upcoming Auctions ({len(auction_sales)})")
-    lines.append("_Online, in-person, and sealed-bid sales — sorted by soonest date._")
-    lines.append("")
-    if auction_sales:
-        lines.extend(_render_table(auction_sales))
-        lines.append("")
-    else:
-        lines.append("No upcoming auctions found.")
-        lines.append("")
-
-    # === Section 2: Over-the-Counter Sales ===
+    lines.extend(_render_split_section(
+        auction_sales, "Upcoming Auctions",
+        "Online, in-person, and sealed-bid sales — scheduled dates first, soonest at top.",
+    ))
     lines.append("---")
     lines.append("")
-    lines.append(f"## Over-the-Counter (OTC) Sales ({len(otc_sales)})")
-    lines.append("_Ongoing/repurchase sales available at fixed price — sorted by soonest date._")
-    lines.append("")
-    if otc_sales:
-        lines.extend(_render_table(otc_sales))
-        lines.append("")
-    else:
-        lines.append("No over-the-counter sales found.")
-        lines.append("")
+    lines.extend(_render_split_section(
+        otc_sales, "Over-the-Counter (OTC) Sales",
+        "Ongoing/repurchase sales available at fixed price — scheduled dates first, soonest at top.",
+    ))
 
     # Details split into the same two buckets
     lines.append("---")
@@ -608,11 +715,11 @@ def generate_markdown_report(
     lines.append(f"## Counties Needing Manual Review ({len(error_entries)} entries)")
     lines.append("")
     if error_entries:
-        lines.append("| County | URL | Issue |")
-        lines.append("|---|---|---|")
+        lines.append("| County | URL | Issue | Suggested Action |")
+        lines.append("|---|---|---|---|")
         for e in error_entries:
-            issue = e.error_detail or e.result
-            lines.append(f"| {e.county} | [Link]({e.url}) | {issue} |")
+            explanation, action = error_guidance(e.result, e.error_detail)
+            lines.append(f"| {md_cell(e.county)} | [Link]({e.url}) | {md_cell(explanation)} | {md_cell(action)} |")
         lines.append("")
     else:
         lines.append("No counties need manual review.")
@@ -645,12 +752,13 @@ def generate_csv_report(sales: List[SaleRecord], run_date: date) -> None:
     def _sort_key(rec):
         return (rec.sale_date or date.max, rec.county)
 
+    current = [s for s in sales if s.sale_date is None or s.sale_date >= run_date]
     auction_sales = sorted(
-        [s for s in sales if s.sale_type != "over_the_counter"],
+        [s for s in current if s.sale_type != "over_the_counter"],
         key=_sort_key,
     )
     otc_sales = sorted(
-        [s for s in sales if s.sale_type == "over_the_counter"],
+        [s for s in current if s.sale_type == "over_the_counter"],
         key=_sort_key,
     )
 
@@ -741,21 +849,27 @@ def main():
 
         log.info("[%d/%d] Checking %s...", idx + 1, len(df), county)
 
-        # Check primary URL
-        sales, log_entry = check_single_url(source_url, county, source_type)
-        all_sales.extend(sales)
-        all_log_entries.append(log_entry)
-        time.sleep(RATE_LIMIT_DELAY)
-
-        # Check secondary URL if present
+        # One county's failure must never kill the whole run.
+        urls_to_check = [str(source_url).strip()]
         if pd.notna(source_url_2) and str(source_url_2).strip():
             url2 = str(source_url_2).strip()
-            if url2 != source_url:
-                log.info("  Checking secondary URL...")
-                sales2, log_entry2 = check_single_url(url2, county, source_type)
-                all_sales.extend(sales2)
-                all_log_entries.append(log_entry2)
-                time.sleep(RATE_LIMIT_DELAY)
+            if url2 != urls_to_check[0]:
+                urls_to_check.append(url2)
+
+        for check_url in urls_to_check:
+            try:
+                sales, log_entry = check_single_url(check_url, county, source_type)
+            except Exception as e:
+                log.warning("  %s: unexpected error: %s", county, e)
+                sales = []
+                log_entry = CheckLogEntry(
+                    county=county, url=check_url,
+                    check_time=datetime.now().isoformat(timespec="seconds"),
+                    result="error_other", error_detail=str(e)[:200],
+                )
+            all_sales.extend(sales)
+            all_log_entries.append(log_entry)
+            time.sleep(RATE_LIMIT_DELAY)
 
         # Update last_checked_date
         df.at[idx, "last_checked_date"] = run_date.isoformat()
